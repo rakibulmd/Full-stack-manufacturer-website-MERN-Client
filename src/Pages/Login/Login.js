@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Login = () => {
     const [toggler, setToggler] = useState("login");
-
+    const [signInWithGoogle, googleUser, googleLoading, GoogleError] =
+        useSignInWithGoogle(auth);
+    const handleGoogleSignIn = () => {
+        console.log("google sing in button clicked");
+        signInWithGoogle();
+    };
     const {
         register,
         formState: { errors },
@@ -213,6 +220,7 @@ const Login = () => {
                     <div class="divider py-3">OR</div>
                     <div className="flex justify-center">
                         <button
+                            onClick={handleGoogleSignIn}
                             type="button"
                             class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
                         >
