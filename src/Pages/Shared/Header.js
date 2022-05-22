@@ -31,21 +31,23 @@ const Header = () => {
                 <CustomLink to="/">Home</CustomLink>
             </li>
             <li className="font-bold hover:text-primary">
-                <CustomLink to="/">Products</CustomLink>
+                <CustomLink to="/products">Products</CustomLink>
             </li>
             <li className="font-bold hover:text-primary">
-                <CustomLink to="/">Slot</CustomLink>
+                <CustomLink to="/slot">Slot</CustomLink>
             </li>
+            {user && (
+                <li className="font-bold hover:text-primary">
+                    <CustomLink to="/dashboard">Dashboard</CustomLink>
+                </li>
+            )}
             <li className="font-bold hover:text-primary">
-                <CustomLink to="/">Dashboard</CustomLink>
-            </li>
-            <li className="font-bold hover:text-primary">
-                <CustomLink to="/">Blogs</CustomLink>
+                <CustomLink to="/blogs">Blogs</CustomLink>
             </li>
         </>
     );
     return (
-        <div className=" bg-secondary text-white">
+        <div className=" bg-secondary/75 text-white sticky top-0">
             <div className="container mx-auto">
                 <div className="navbar">
                     <div className="navbar-start">

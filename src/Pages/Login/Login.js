@@ -5,10 +5,13 @@ import {
     useSignInWithGoogle,
     useCreateUserWithEmailAndPassword,
     useSignInWithEmailAndPassword,
+    useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 import { toast } from "react-toastify";
+import useToken from "../../Hooks/useToken";
+import logoDim from "../../asset/images/logo/logoDim.png";
 
 const Login = () => {
     const [toggler, setToggler] = useState("login");
@@ -38,6 +41,12 @@ const Login = () => {
     };
 
     //
+    const [updateProfile, updating, error] = useUpdateProfile(auth);
+
+    //
+
+    //
+    const [token] = useToken(googleUser || logInUser || registerUser);
     const {
         register,
         formState: { errors },
@@ -50,20 +59,27 @@ const Login = () => {
     };
 
     //
-    const onRegisterSubmit = (data) => {
-        createUserWithEmailAndPassword(data.email, data.password);
+    const onRegisterSubmit = async (data) => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
     };
 
     useEffect(() => {
-        if (googleUser || logInUser || registerUser) {
+        if (token) {
             navigate(from, { replace: true });
             toast.success("Signed In Successfully.");
+            console.log(googleUser || logInUser || registerUser);
         }
-    }, [from, navigate, logInUser, registerUser, googleUser]);
+    }, [from, navigate, logInUser, registerUser, googleUser, token]);
     return (
-        <div className="container mx-auto">
+        <div
+            className="container mx-auto"
+            style={{
+                background: `url(${logoDim}) no-repeat center center/cover`,
+            }}
+        >
             <div className="max-w-[500px] mx-auto py-10 px-2">
-                <div className="p-5 bg-white rounded-md border border-gray-700 ">
+                <div className="p-5 bg-white rounded-md border border-gray-700">
                     {toggler === "login" && (
                         <form onSubmit={handleSubmit(onLogInSubmit)}>
                             <div className="mb-5">

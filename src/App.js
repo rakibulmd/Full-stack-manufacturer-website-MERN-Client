@@ -2,8 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import Blogs from "./Pages/Blogs/Blogs";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import RequireAuth from "./Pages/Login/RequireAuth";
 import Header from "./Pages/Shared/Header";
 
 function App() {
@@ -13,6 +16,22 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
                 <Route path="/login" element={<Login></Login>}></Route>
+                <Route
+                    path="/dashboard"
+                    element={
+                        <RequireAuth>
+                            <Dashboard></Dashboard>
+                        </RequireAuth>
+                    }
+                ></Route>
+                <Route
+                    path="/blogs"
+                    element={
+                        <RequireAuth>
+                            <Blogs></Blogs>
+                        </RequireAuth>
+                    }
+                ></Route>
             </Routes>
 
             <ToastContainer
