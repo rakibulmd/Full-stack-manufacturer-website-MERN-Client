@@ -11,10 +11,9 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
-            </Routes>
-            <Routes>
                 <Route path="/login" element={<Login></Login>}></Route>
             </Routes>
+
             <ToastContainer
                 position="top-center"
                 autoClose={3500}

@@ -1,7 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import logo from "../../asset/images/logo/logo.png";
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
+
 const Header = () => {
+    const [user] = useAuthState(auth);
     function CustomLink({ children, to, ...props }) {
         let resolved = useResolvedPath(to);
         let match = useMatch({ path: resolved.pathname, end: true });
@@ -84,12 +89,23 @@ const Header = () => {
                         <ul className="menu menu-horizontal p-0">{navItems}</ul>
                     </div>
                     <div className="navbar-end">
-                        <Link
-                            to="/login"
-                            className="btn btn-primary text-black"
-                        >
-                            Log In
-                        </Link>
+                        {user ? (
+                            <button
+                                onClick={() => {
+                                    signOut(auth);
+                                }}
+                                className="btn btn-primary text-black"
+                            >
+                                Sign Out
+                            </button>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="btn btn-primary text-black"
+                            >
+                                Log In
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>
