@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
     useSignInWithGoogle,
     useCreateUserWithEmailAndPassword,
@@ -8,11 +8,18 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [toggler, setToggler] = useState("login");
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    //
     const [signInWithGoogle, googleUser, googleLoading, GoogleError] =
         useSignInWithGoogle(auth);
+
+    //
     const [
         createUserWithEmailAndPassword,
         registerUser,
@@ -20,27 +27,39 @@ const Login = () => {
         registerError,
     ] = useCreateUserWithEmailAndPassword(auth);
 
+    //
     const [signInWithEmailAndPassword, logInUser, logInLoading, logInError] =
         useSignInWithEmailAndPassword(auth);
+
+    //
     const handleGoogleSignIn = () => {
         console.log("google sing in button clicked");
         signInWithGoogle();
     };
+
+    //
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm();
 
+    //
     const onLogInSubmit = (data) => {
         signInWithEmailAndPassword(data.email, data.password);
     };
+
+    //
     const onRegisterSubmit = (data) => {
-        console.log(data.email);
-        console.log(data.password);
         createUserWithEmailAndPassword(data.email, data.password);
     };
 
+    useEffect(() => {
+        if (googleUser || logInUser || registerUser) {
+            navigate(from, { replace: true });
+            toast.success("Signed In Successfully.");
+        }
+    }, [from, navigate, logInUser, registerUser, googleUser]);
     return (
         <div className="container mx-auto">
             <div className="max-w-[500px] mx-auto py-10 px-2">
