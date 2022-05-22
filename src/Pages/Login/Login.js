@@ -36,7 +36,6 @@ const Login = () => {
 
     //
     const handleGoogleSignIn = () => {
-        console.log("google sing in button clicked");
         signInWithGoogle();
     };
 
@@ -68,7 +67,6 @@ const Login = () => {
         if (token) {
             navigate(from, { replace: true });
             toast.success("Signed In Successfully.");
-            console.log(googleUser || logInUser || registerUser);
         }
     }, [from, navigate, logInUser, registerUser, googleUser, token]);
     return (
@@ -268,12 +266,12 @@ const Login = () => {
                         </form>
                     )}
 
-                    <div class="divider py-3">OR</div>
+                    <div className="divider py-3">OR</div>
                     <div className="flex justify-center">
                         <button
                             onClick={handleGoogleSignIn}
                             type="button"
-                            class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+                            className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
                         >
                             {googleLoading ? (
                                 <span className="w-10">
@@ -281,7 +279,7 @@ const Login = () => {
                                 </span>
                             ) : (
                                 <svg
-                                    class="w-4 h-4 mr-2 -ml-1"
+                                    className="w-4 h-4 mr-2 -ml-1"
                                     aria-hidden="true"
                                     focusable="false"
                                     data-prefix="fab"
