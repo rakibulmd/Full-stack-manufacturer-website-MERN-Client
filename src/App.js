@@ -4,7 +4,7 @@ import Header from "./Pages/Shared/Header";
 
 function App() {
     return (
-        <div>
+        <div className="font-roboto">
             <Header></Header>
             <ToastContainer
                 position="top-center"
