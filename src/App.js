@@ -10,6 +10,7 @@ import MyReview from "./Pages/Dashboard/MyReview";
 import Users from "./Pages/Dashboard/Users";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import RequireAdmin from "./Pages/Login/RequireAdmin";
 import RequireAuth from "./Pages/Login/RequireAuth";
 import Purchase from "./Pages/Purchase/Purchase";
 import Header from "./Pages/Shared/Header";
@@ -38,7 +39,14 @@ function App() {
                         path="myReviews"
                         element={<MyReview></MyReview>}
                     ></Route>
-                    <Route path="users" element={<Users></Users>}></Route>
+                    <Route
+                        path="users"
+                        element={
+                            <RequireAdmin>
+                                <Users></Users>
+                            </RequireAdmin>
+                        }
+                    ></Route>
                 </Route>
                 <Route
                     path="/purchase/:id"

@@ -4,21 +4,32 @@ import { IconContext } from "react-icons";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 const UserRow = ({ rowUser, updated, setUpdated }) => {
     const { img, role, email, name } = rowUser;
     const [user] = useAuthState(auth);
     const handleAdminBtn = async (userEmail) => {
-        console.log(userEmail);
-
-        const response = await axios.put(
-            `http://localhost:5000/users/admin?email=${user.email}`,
-            {
-                email: userEmail,
+        try {
+            const response = await axios.put(
+                `http://localhost:5000/users/admin?email=${user.email}`,
+                {
+                    email: userEmail,
+                }
+            );
+            if (response.data.modifiedCount) {
+                setUpdated(!updated);
+                toast.success("Successfully added as Admin");
             }
-        );
-        console.log(response);
-        setUpdated(!updated);
+        } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                toast.error("Unauthorized!");
+                return;
+            }
+        }
     };
 
     return (
