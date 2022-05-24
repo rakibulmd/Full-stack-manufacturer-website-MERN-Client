@@ -57,6 +57,10 @@ const Purchase = () => {
     };
     const onSubmit = async (purchaseData) => {
         purchaseData.paid = false;
+        purchaseData.productName = product.name;
+        purchaseData.productId = product._id;
+        purchaseData.productPrice = product.price;
+        console.log(purchaseData);
         const response = await axios.post(
             "http://localhost:5000/orders",
             purchaseData
