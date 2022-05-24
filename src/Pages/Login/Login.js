@@ -135,7 +135,7 @@ const Login = () => {
                                 <p>
                                     Not registered?{" "}
                                     <button
-                                        className="underline text-emerald-400"
+                                        className="underline text-blue-600"
                                         onClick={() => {
                                             setToggler("register");
                                         }}
@@ -148,7 +148,7 @@ const Login = () => {
                                 <p>
                                     Forgot Password?{" "}
                                     <Link
-                                        className="underline text-emerald-400"
+                                        className="underline text-blue-600"
                                         to="/resetpassword"
                                     >
                                         Reset Now...

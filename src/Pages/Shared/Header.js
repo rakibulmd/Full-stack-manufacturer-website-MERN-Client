@@ -47,7 +47,7 @@ const Header = () => {
         </>
     );
     return (
-        <div className=" bg-secondary/75 text-white sticky top-0">
+        <div className=" bg-secondary/80 text-white sticky top-0 z-50">
             <div className="container mx-auto">
                 <div className="navbar">
                     <div className="navbar-start">
@@ -95,6 +95,7 @@ const Header = () => {
                             <button
                                 onClick={() => {
                                     signOut(auth);
+                                    localStorage.removeItem("accessToken");
                                 }}
                                 className="btn btn-primary text-black"
                             >
