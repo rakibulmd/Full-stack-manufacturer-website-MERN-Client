@@ -255,6 +255,7 @@ const Purchase = () => {
 
                         <input
                             className="w-full bg-primary hover:bg-secondary hover:text-primary px-5 py-2 rounded-md text-secondary transition-all btn"
+                            disabled={errors.quantity}
                             type="submit"
                             value="Order Now"
                         />

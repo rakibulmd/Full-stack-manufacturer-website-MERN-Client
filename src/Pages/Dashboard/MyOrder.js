@@ -21,7 +21,7 @@ const MyOrder = ({ order }) => {
             <div class="card-body">
                 <div className="lg:flex justify-between">
                     <Link to={`/purchase/${productId}`} class="card-title">
-                        {productName}!
+                        {productName}
                     </Link>
                     <h2>Order Id: {_id}</h2>
                 </div>
