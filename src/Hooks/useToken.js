@@ -13,7 +13,7 @@ const useToken = (user) => {
             img:
                 user?.user?.photoURL ||
                 "https://i.ibb.co/C81qjZG/Pngtree-man-default-avatar-5938280-1.png",
-            isAdmin: false,
+            role: user,
         };
         if (email) {
             const put = async () => {
