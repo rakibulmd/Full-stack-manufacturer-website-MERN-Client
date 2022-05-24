@@ -1,31 +1,45 @@
 import React from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
-const UserRow = ({ user }) => {
-    const handleAdminBtn = (userEmail, updated, setUpdated) => {
+const UserRow = ({ rowUser, updated, setUpdated }) => {
+    const { img, role, email, name } = rowUser;
+    const [user] = useAuthState(auth);
+    const handleAdminBtn = async (userEmail) => {
         console.log(userEmail);
+
+        const response = await axios.put(
+            `http://localhost:5000/users/admin?email=${user.email}`,
+            {
+                email: userEmail,
+            }
+        );
+        console.log(response);
         setUpdated(!updated);
     };
+
     return (
         <tr>
             <td>
                 <div class="flex items-center space-x-3">
                     <div class="avatar">
                         <div class="mask mask-squircle w-12 h-12">
-                            <img src={user?.img} alt="user" />
+                            <img src={img} alt="user" />
                         </div>
                     </div>
                     <div>
                         <div class="font-bold">
-                            {user?.name ? user?.name : "Login to update"}
+                            {name ? name : "Login to update"}
                         </div>
                     </div>
                 </div>
             </td>
-            <td>{user?.email}</td>
+            <td>{email}</td>
             <td>
-                {user?.role === "admin" ? (
+                {role === "admin" ? (
                     <IconContext.Provider
                         value={{
                             className: "w-6 h-6",
@@ -51,10 +65,10 @@ const UserRow = ({ user }) => {
             <th>
                 <button
                     onClick={() => {
-                        handleAdminBtn(user.email);
+                        handleAdminBtn(email);
                     }}
                     class="btn btn-warning"
-                    disabled={user?.role === "admin"}
+                    disabled={role === "admin"}
                 >
                     Make Admin
                 </button>

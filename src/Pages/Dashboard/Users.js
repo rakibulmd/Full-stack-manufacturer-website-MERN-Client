@@ -52,7 +52,7 @@ const Users = () => {
                         {users?.map((user) => (
                             <UserRow
                                 key={user._id}
-                                user={user}
+                                rowUser={user}
                                 updated={updated}
                                 setUpdated={setUpdated}
                             ></UserRow>
