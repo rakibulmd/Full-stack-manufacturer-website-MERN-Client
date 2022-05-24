@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 
@@ -18,28 +20,39 @@ const Purchase = () => {
         fetch(`http://localhost:5000/products/${id}`).then((res) => res.json())
     );
     const [orderQuantity, setOrderQuantity] = useState(product?.moq);
-    const increaseOrderQuantity = (event) => {
-        event.preventDefault();
-        setOrderQuantity(orderQuantity + 1);
-        reset({
-            data: "quantity",
-        });
-    };
-    const decreaseOrderQuantity = (event) => {
-        event.preventDefault();
-        setOrderQuantity(orderQuantity - 1);
-        reset({
-            data: "quantity",
-        });
-    };
     const {
         register,
         reset,
         formState: { errors },
         handleSubmit,
     } = useForm();
-    const onSubmit = (purchaseData) => {
-        console.log(purchaseData);
+    useEffect(() => {
+        setOrderQuantity(product?.moq);
+    }, [product]);
+    const increaseOrderQuantity = (event) => {
+        event.preventDefault();
+        setOrderQuantity(parseInt(orderQuantity) + 1);
+        reset({
+            data: "quantity",
+        });
+    };
+    const decreaseOrderQuantity = (event) => {
+        event.preventDefault();
+        setOrderQuantity(parseInt(orderQuantity) - 1);
+        reset({
+            data: "quantity",
+        });
+    };
+    const onSubmit = async (purchaseData) => {
+        purchaseData.paid = false;
+        const response = await axios.post(
+            "http://localhost:5000/orders",
+            purchaseData
+        );
+        if (response?.data?.insertedId) {
+            toast.success("Order placed successfully");
+            reset();
+        }
     };
     if (isLoading) {
         return (
@@ -217,7 +230,7 @@ const Purchase = () => {
                         <input
                             className="w-full bg-primary hover:bg-secondary hover:text-primary px-5 py-2 rounded-md text-secondary transition-all"
                             type="submit"
-                            value="Purchase"
+                            value="Order Now"
                         />
                     </form>
                 </div>
