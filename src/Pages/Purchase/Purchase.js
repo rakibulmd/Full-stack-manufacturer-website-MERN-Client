@@ -11,14 +11,26 @@ import Loading from "../Shared/Loading";
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
+    const [updated, setUpdated] = useState(false);
 
-    const {
-        data: product,
-        isLoading,
-        error,
-    } = useQuery(["products", id, user], () =>
-        fetch(`http://localhost:5000/products/${id}`).then((res) => res.json())
-    );
+    // const {
+    //     data: product,
+    //     isLoading,
+    //     error,
+    // } = useQuery(["products", id, user], () =>
+    //     fetch(`http://localhost:5000/products/${id}`).then((res) => res.json())
+    // );
+
+    const [product, setProduct] = useState({});
+    useEffect(() => {
+        const get = async () => {
+            const response = await axios.get(
+                `http://localhost:5000/products/${id}`
+            );
+            setProduct(response.data);
+        };
+        get();
+    }, [id, user, updated]);
     const [orderQuantity, setOrderQuantity] = useState(product?.moq);
     const {
         register,
@@ -28,7 +40,7 @@ const Purchase = () => {
     } = useForm();
     useEffect(() => {
         setOrderQuantity(product?.moq);
-    }, [product]);
+    }, [product, user, id]);
     const increaseOrderQuantity = (event) => {
         event.preventDefault();
         setOrderQuantity(parseInt(orderQuantity) + 1);
@@ -49,20 +61,30 @@ const Purchase = () => {
             "http://localhost:5000/orders",
             purchaseData
         );
+
         if (response?.data?.insertedId) {
             toast.success("Order placed successfully");
             reset();
+            const { data } = await axios.put(
+                `http://localhost:5000/products/${product._id}`,
+                {
+                    stock: product.stock - parseInt(purchaseData.quantity),
+                }
+            );
+            if (data?.acknowledged) {
+                setUpdated(!updated);
+            }
         }
     };
-    if (isLoading) {
-        return (
-            <div className="flex justify-center items-center">
-                <div className="w-40 h-40 mx-auto">
-                    <Loading></Loading>
-                </div>
-            </div>
-        );
-    }
+    // if (isLoading) {
+    //     return (
+    //         <div className="flex justify-center items-center">
+    //             <div className="w-40 h-40 mx-auto">
+    //                 <Loading></Loading>
+    //             </div>
+    //         </div>
+    //     );
+    // }
     return (
         <div className="container mx-auto p-5">
             <div className="md:flex items-center justify-center gap-10">
@@ -228,7 +250,7 @@ const Purchase = () => {
                         </div>
 
                         <input
-                            className="w-full bg-primary hover:bg-secondary hover:text-primary px-5 py-2 rounded-md text-secondary transition-all"
+                            className="w-full bg-primary hover:bg-secondary hover:text-primary px-5 py-2 rounded-md text-secondary transition-all btn"
                             type="submit"
                             value="Order Now"
                         />
