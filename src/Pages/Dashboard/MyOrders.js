@@ -20,7 +20,7 @@ const MyOrders = () => {
     return (
         <div>
             <h2>My Orders</h2>
-            <div className="grid grid-cols-1 gap-5 p-3">
+            <div className="grid grid-cols-1 gap-y-6 p-3">
                 {orders.map((order, index) => (
                     <MyOrder
                         key={order._id}

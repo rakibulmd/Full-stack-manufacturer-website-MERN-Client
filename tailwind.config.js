@@ -5,6 +5,10 @@ module.exports = {
             fontFamily: {
                 roboto: ["Roboto", "sans-serif"],
             },
+            boxShadow: {
+                "3xl": "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                "4xl": "rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+            },
         },
     },
     daisyui: {

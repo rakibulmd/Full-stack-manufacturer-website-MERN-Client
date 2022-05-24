@@ -1,9 +1,20 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const MyProfile = () => {
+    const [user] = useAuthState(auth);
+    console.log(user);
     return (
-        <div>
-            <h2>This is my profile</h2>
+        <div className="">
+            <h2>Welcome {user?.displayName}</h2>
+            {user?.photoURL && (
+                <div class="avatar">
+                    <div class="w-12">
+                        <img src={user?.photoURL} alt="" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

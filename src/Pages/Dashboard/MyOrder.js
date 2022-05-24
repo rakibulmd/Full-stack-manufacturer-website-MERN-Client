@@ -13,14 +13,14 @@ const MyOrder = ({ order }) => {
     } = order;
     return (
         <div
-            class="card w-full bg-primary/10 shadow-xl p-2"
+            className="card w-full p-3 shadow-3xl"
             style={{
                 background: `url(${logoDim}) no-repeat`,
             }}
         >
-            <div class="card-body">
+            <div className="card-bod">
                 <div className="lg:flex justify-between">
-                    <Link to={`/purchase/${productId}`} class="card-title">
+                    <Link to={`/purchase/${productId}`} className="card-title">
                         {productName}
                     </Link>
                     <h2>Order Id: {_id}</h2>
@@ -30,26 +30,39 @@ const MyOrder = ({ order }) => {
                 <p>Shipping Address: {address}</p>
                 <div className="flex gap-3">
                     {paid ? (
-                        <div class="card-actions">
-                            <button class="btn btn-success">Paid</button>
+                        <div className="card-actions">
+                            <button className="btn btn-success">Paid</button>
                         </div>
                     ) : (
-                        <div class="card-actions">
-                            <button class="btn btn-primary">Pay Now</button>
+                        <div className="card-actions">
+                            <button className="btn btn-primary">Pay Now</button>
                         </div>
                     )}
                     {paid ? (
-                        <div class="card-actions">
-                            <button class="btn btn-info">
+                        <div className="card-actions">
+                            <button className="btn btn-info">
                                 Pending Shipment
                             </button>
                         </div>
                     ) : (
-                        <div class="card-actions">
-                            <button class="btn btn-error">Cancel Order</button>
+                        <div className="card-actions">
+                            <button className="btn btn-error">
+                                Cancel Order
+                            </button>
                         </div>
                     )}
                 </div>
+
+                <ul className="steps mt-3">
+                    <li className="step step-primary">Register</li>
+                    <li className="step step-primary">Place Order</li>
+                    <li className={paid ? "step step-primary" : "step"}>
+                        Payment
+                    </li>
+                    <li className={paid ? "step step-primary" : "step"}>
+                        Receive Product
+                    </li>
+                </ul>
             </div>
         </div>
     );

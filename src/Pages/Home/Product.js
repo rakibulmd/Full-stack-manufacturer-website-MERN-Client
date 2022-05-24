@@ -5,7 +5,7 @@ const Product = ({ product }) => {
     const { _id, name, img, description, price, moq, stock, rating } = product;
     const navigate = useNavigate();
     return (
-        <div class="card bg-base-100 shadow-xl">
+        <div class="card bg-primary/5 shadow-xl">
             <figure class="px-10 pt-10">
                 <img src={img} alt="Shoes" class="rounded-xl" />
             </figure>

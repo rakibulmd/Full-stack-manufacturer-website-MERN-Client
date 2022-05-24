@@ -57,6 +57,7 @@ const Purchase = () => {
     };
     const onSubmit = async (purchaseData) => {
         purchaseData.paid = false;
+        purchaseData.quantity = parseInt(purchaseData.quantity);
         purchaseData.productName = product.name;
         purchaseData.productId = product._id;
         purchaseData.productPrice = product.price;
