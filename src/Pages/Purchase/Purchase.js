@@ -11,7 +11,7 @@ import Loading from "../Shared/Loading";
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
-    const [updated, setUpdated] = useState(false);
+    // const [updated, setUpdated] = useState(false);
 
     // const {
     //     data: product,
@@ -30,7 +30,7 @@ const Purchase = () => {
             setProduct(response.data);
         };
         get();
-    }, [id, user, updated]);
+    }, [id, user]);
     const [orderQuantity, setOrderQuantity] = useState(product?.moq);
     const {
         register,
@@ -65,15 +65,15 @@ const Purchase = () => {
         if (response?.data?.insertedId) {
             toast.success("Order placed successfully");
             reset();
-            const { data } = await axios.put(
-                `http://localhost:5000/products/${product._id}`,
-                {
-                    stock: product.stock - parseInt(purchaseData.quantity),
-                }
-            );
-            if (data?.acknowledged) {
-                setUpdated(!updated);
-            }
+            // const { data } = await axios.put(
+            //     `http://localhost:5000/products/${product._id}`,
+            //     {
+            //         stock: product.stock - parseInt(purchaseData.quantity),
+            //     }
+            // );
+            // if (data?.acknowledged) {
+            //     setUpdated(!updated);
+            // }
         }
     };
     // if (isLoading) {
