@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import Purchase from "./Pages/Purchase/Purchase";
 import Header from "./Pages/Shared/Header";
 
 function App() {
@@ -21,6 +22,14 @@ function App() {
                     element={
                         <RequireAuth>
                             <Dashboard></Dashboard>
+                        </RequireAuth>
+                    }
+                ></Route>
+                <Route
+                    path="/purchase/:id"
+                    element={
+                        <RequireAuth>
+                            <Purchase></Purchase>
                         </RequireAuth>
                     }
                 ></Route>

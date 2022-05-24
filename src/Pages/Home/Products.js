@@ -15,8 +15,10 @@ const Products = () => {
     );
     if (isLoading) {
         return (
-            <div className="w-40 h-40 flex justify-center">
-                <Loading></Loading>
+            <div className="flex justify-center items-center">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
             </div>
         );
     }
