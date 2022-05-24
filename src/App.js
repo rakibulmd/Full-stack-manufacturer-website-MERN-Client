@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyReview from "./Pages/Dashboard/MyReview";
+import Users from "./Pages/Dashboard/Users";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import RequireAuth from "./Pages/Login/RequireAuth";
@@ -37,6 +38,7 @@ function App() {
                         path="myReviews"
                         element={<MyReview></MyReview>}
                     ></Route>
+                    <Route path="users" element={<Users></Users>}></Route>
                 </Route>
                 <Route
                     path="/purchase/:id"

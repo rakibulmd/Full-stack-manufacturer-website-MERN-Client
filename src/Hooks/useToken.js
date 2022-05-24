@@ -1,14 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useToken = (user) => {
     const [token, setToken] = useState("");
+    console.log(user);
 
     useEffect(() => {
         const email = user?.user?.email;
         const currentUser = {
             email: user?.user?.email,
             name: user?.user?.displayName,
+            img:
+                user?.user?.photoURL ||
+                "https://i.ibb.co/C81qjZG/Pngtree-man-default-avatar-5938280-1.png",
+            isAdmin: false,
         };
         if (email) {
             const put = async () => {
