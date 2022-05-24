@@ -15,7 +15,7 @@ const Header = () => {
             <div>
                 <Link
                     style={{
-                        borderBottom: match ? "2px solid #f7c02d" : "",
+                        color: match ? "#f7c02d" : "",
                     }}
                     to={to}
                     {...props}
