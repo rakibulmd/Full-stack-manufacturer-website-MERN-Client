@@ -31,7 +31,7 @@ const Header = () => {
                 <CustomLink to="/">Home</CustomLink>
             </li>
             <li className="font-bold hover:text-primary">
-                <CustomLink to="/products">Products</CustomLink>
+                <CustomLink to="/allProducts">Products</CustomLink>
             </li>
             <li className="font-bold hover:text-primary">
                 <CustomLink to="/slot">Slot</CustomLink>
