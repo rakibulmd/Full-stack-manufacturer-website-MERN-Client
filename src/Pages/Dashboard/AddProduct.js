@@ -1,28 +1,76 @@
-import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import logoDim from "../../asset/images/logo/logoDim.png";
+import axios from "axios";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const {
         register,
         formState: { errors },
         handleSubmit,
         reset,
     } = useForm();
-    const onSubmit = (data) => {
-        data.stock = parseInt(data.stock);
-        data.price = parseInt(data.price);
-        data.moq = parseInt(data.moq);
-        console.log(data);
-        reset();
+    const imgBBKey = "ef3f2d60caa94b223266f9efbfea12b8";
+    const onSubmit = async (data) => {
+        const image = data.img[0];
+        const formData = new FormData();
+        formData.append("image", image);
+        const url = `https://api.imgbb.com/1/upload?key=${imgBBKey}`;
+        fetch(url, {
+            method: "POST",
+            body: formData,
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                if (result.success) {
+                    data.img = result.data.url;
+                    data.stock = parseInt(data.stock);
+                    data.price = parseInt(data.price);
+                    data.moq = parseInt(data.moq);
+                    console.log(data);
+                    try {
+                        const post = async () => {
+                            const response = await axios.post(
+                                `http://localhost:5000/addProduct?email=${user?.email}`,
+                                data
+                            );
+                            if (response?.data.insertedId) {
+                                toast.success("Item added successfully");
+                                reset();
+                            }
+                        };
+                        post();
+                    } catch (error) {
+                        if (
+                            error.response.status === 401 ||
+                            error.response.status === 403
+                        ) {
+                            navigate("/login");
+                            signOut(auth);
+                            localStorage.removeItem("accessToken");
+                            return;
+                        }
+                    }
+                }
+            });
+
+        // reset();
     };
+
     return (
-        <div className="container mx-auto">
+        <div
+            className="container mx-auto"
+            style={{
+                background: `url(${logoDim}) no-repeat center center/cover`,
+            }}
+        >
             <h2 className="text-2xl font-bold uppercase pt-10 text-center">
                 Add A Product
             </h2>
@@ -41,7 +89,7 @@ const AddProduct = () => {
                         <input
                             id="name"
                             className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
-                            placeholder="eg: Pump for M825HI"
+                            placeholder="eg: Light sensor"
                             type="text"
                             autoComplete="off"
                             {...register("name", {
@@ -55,7 +103,7 @@ const AddProduct = () => {
                             </span>
                         )}
                     </div>
-                    <div className="mb-7">
+                    {/* <div className="mb-7">
                         <label
                             htmlFor="img"
                             className="block mb-2 text-sm font-medium text-secondary"
@@ -75,7 +123,7 @@ const AddProduct = () => {
                                 URL is required.
                             </span>
                         )}
-                    </div>
+                    </div> */}
                     <div className="mb-7">
                         <label
                             htmlFor="description"
@@ -87,9 +135,11 @@ const AddProduct = () => {
                             {...register("category")}
                             className="select select-primary block w-full p-2.5"
                         >
-                            <option value="transistor">transistor</option>
-                            <option value="sensor">sensor</option>
-                            <option value="solenoid">solenoid</option>
+                            <option value="transistor">Transistor</option>
+                            <option value="sensor">Sensor</option>
+                            <option value="solenoid">Solenoid</option>
+                            <option value="capacitor">Capacitor</option>
+                            <option value="others">Others</option>
                         </select>
                     </div>
                     <div className="mb-7">
@@ -128,6 +178,7 @@ const AddProduct = () => {
                             className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
                             placeholder="Item price"
                             type="number"
+                            defaultValue={"0"}
                             autoComplete="off"
                             {...register("price", { min: 0, required: true })}
                         />
@@ -147,7 +198,7 @@ const AddProduct = () => {
                         <input
                             id="quantity"
                             className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
-                            placeholder="Opening quantity here"
+                            placeholder="Opening Stock here"
                             type="number"
                             autoComplete="off"
                             {...register("stock", {
@@ -173,6 +224,7 @@ const AddProduct = () => {
                             id="sold"
                             className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
                             type="number"
+                            defaultValue={"1"}
                             autoComplete="off"
                             {...register("moq", {
                                 min: 1,
@@ -200,6 +252,26 @@ const AddProduct = () => {
                             readOnly
                             {...register("email")}
                         />
+                    </div>
+                    <div className="mb-7">
+                        <label
+                            htmlFor="sold"
+                            className="block mb-2 text-sm font-medium text-secondary"
+                        >
+                            Upload Image:
+                        </label>
+                        <input
+                            className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block p-2.5  placeholder-secondary/75 text-black  border-secondary"
+                            type="file"
+                            {...register("img", {
+                                required: true,
+                            })}
+                        />
+                        {errors.img1 && (
+                            <span className="text-rose-600">
+                                Please attach a image file!
+                            </span>
+                        )}
                     </div>
 
                     <input
