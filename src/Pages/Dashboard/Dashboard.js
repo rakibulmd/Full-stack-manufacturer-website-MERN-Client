@@ -63,9 +63,16 @@ const Dashboard = () => {
                     </li>
 
                     {isAdmin && (
-                        <li>
-                            <Link to="/dashboard/users">Users</Link>
-                        </li>
+                        <>
+                            <li>
+                                <Link to="/dashboard/users">Manage Users</Link>
+                            </li>
+                            <li>
+                                <Link to="/dashboard/allOrders">
+                                    All Orders
+                                </Link>
+                            </li>
+                        </>
                     )}
                 </ul>
             </div>

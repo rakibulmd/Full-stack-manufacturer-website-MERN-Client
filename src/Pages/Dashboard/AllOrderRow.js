@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoDim from "../../asset/images/logo/logoDim.png";
-const MyOrder = ({ order }) => {
+const AllOrderRow = ({ order }) => {
     const {
         _id,
         address,
@@ -31,23 +31,20 @@ const MyOrder = ({ order }) => {
                 <div className="flex gap-3">
                     {paid ? (
                         <div className="card-actions">
-                            <button className="btn btn-success">Paid</button>
-                        </div>
-                    ) : (
-                        <div className="card-actions">
-                            <button className="btn btn-primary">Pay Now</button>
-                        </div>
-                    )}
-                    {paid ? (
-                        <div className="card-actions">
-                            <button className="btn btn-info">
+                            <button className="btn btn-success">
                                 Pending Shipment
                             </button>
                         </div>
                     ) : (
                         <div className="card-actions">
+                            <button className="btn btn-primary">UnPaid</button>
+                        </div>
+                    )}
+
+                    {(order?.shipped || !paid) && (
+                        <div className="card-actions">
                             <button className="btn btn-error">
-                                Cancel Order
+                                Delete Order
                             </button>
                         </div>
                     )}
@@ -68,4 +65,4 @@ const MyOrder = ({ order }) => {
     );
 };
 
-export default MyOrder;
+export default AllOrderRow;
