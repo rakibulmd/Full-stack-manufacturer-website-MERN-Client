@@ -6,20 +6,13 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import useAdmin from "../../Hooks/useAdmin";
 import Loading from "../Shared/Loading";
 
 const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
-    // const [updated, setUpdated] = useState(false);
-
-    // const {
-    //     data: product,
-    //     isLoading,
-    //     error,
-    // } = useQuery(["products", id, user], () =>
-    //     fetch(`http://localhost:5000/products/${id}`).then((res) => res.json())
-    // );
+    const [isAdmin] = useAdmin(user);
 
     const [product, setProduct] = useState({});
     useEffect(() => {
@@ -72,15 +65,7 @@ const Purchase = () => {
             reset();
         }
     };
-    // if (isLoading) {
-    //     return (
-    //         <div className="flex justify-center items-center">
-    //             <div className="w-40 h-40 mx-auto">
-    //                 <Loading></Loading>
-    //             </div>
-    //         </div>
-    //     );
-    // }
+
     return (
         <div className="container mx-auto p-5">
             <div className="md:flex items-center justify-center gap-10">
