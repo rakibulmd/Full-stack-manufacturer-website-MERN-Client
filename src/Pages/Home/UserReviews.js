@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import UserReview from "./UserReview";
 
 const UserReviews = () => {
     const [reviews, setReviews] = useState([]);
@@ -13,8 +14,15 @@ const UserReviews = () => {
         get();
     }, []);
     return (
-        <div>
-            <h2>reviews : {reviews?.length}</h2>
+        <div className="container mx-auto p-5 py-12">
+            <h2 className="text-center text-3xl font-bold pb-5">
+                What our customers say...
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {reviews.map((review) => (
+                    <UserReview key={review._id} review={review}></UserReview>
+                ))}
+            </div>
         </div>
     );
 };
