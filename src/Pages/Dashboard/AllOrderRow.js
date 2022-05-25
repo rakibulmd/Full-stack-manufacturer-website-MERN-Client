@@ -1,8 +1,14 @@
 import axios from "axios";
+import { signOut } from "firebase/auth";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logoDim from "../../asset/images/logo/logoDim.png";
+import auth from "../../firebase.init";
 const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const {
         _id,
         address,
@@ -13,13 +19,47 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
         productId,
     } = order;
     const handleShipment = async (productId, orderId) => {
-        console.log(productId, orderId);
-        const response = await axios.put(
-            `http://localhost:5000/orders/${orderId}`
-        );
-        console.log(response);
-        if (response?.data?.modifiedCount) {
-            setOrderUpdated(!orderUpdated);
+        try {
+            const response = await axios.put(
+                `http://localhost:5000/products/${productId}?email=${user?.email}&quantity=${quantity}`
+            );
+            if (response?.data?.modifiedCount) {
+                setOrderUpdated(!orderUpdated);
+                await axios.put(`http://localhost:5000/orders/${orderId}`);
+            }
+        } catch (error) {
+            if (error.response.status === 406) {
+                toast.error("Insufficient Stock to shipment!");
+            } else if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                navigate("/login");
+                signOut(auth);
+                localStorage.removeItem("accessToken");
+                return;
+            }
+        }
+    };
+    const handleDeleteOrder = async (orderId) => {
+        try {
+            const response = await axios.delete(
+                `http://localhost:5000/orders/${orderId}?email=${user?.email}`
+            );
+            if (response?.data?.deletedCount) {
+                setOrderUpdated(!orderUpdated);
+                toast.success("Order removed");
+            }
+        } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                navigate("/login");
+                signOut(auth);
+                localStorage.removeItem("accessToken");
+                return;
+            }
         }
     };
     return (
@@ -68,26 +108,37 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
 
                     {(order?.shipped || !paid) && (
                         <div className="card-actions">
-                            <button className="btn btn-error">
+                            <button
+                                className="btn btn-error"
+                                onClick={() => {
+                                    handleDeleteOrder(_id);
+                                }}
+                            >
                                 Delete Order
                             </button>
                         </div>
                     )}
                 </div>
 
-                <ul className="steps mt-3">
-                    <li className="step step-primary">Order</li>
-                    <li className={paid ? "step step-primary" : "step"}>
-                        Payment
-                    </li>
-                    <li
-                        className={
-                            order?.shipped ? "step step-primary" : "step"
-                        }
-                    >
-                        Shipment
-                    </li>
-                </ul>
+                <div>
+                    <ul className="steps mt-3">
+                        <li className="step step-primary mr-3">Order</li>
+                        <li
+                            className={
+                                paid ? "step step-primary mr-3" : "step mr-3"
+                            }
+                        >
+                            Payment
+                        </li>
+                        <li
+                            className={
+                                order?.shipped ? "step step-primary" : "step"
+                            }
+                        >
+                            Shipment
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );
