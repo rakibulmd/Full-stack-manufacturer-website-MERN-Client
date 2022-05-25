@@ -36,8 +36,8 @@ const Users = () => {
     }, [navigate, user, updated]);
 
     return (
-        <div>
-            <h2>Users : {users.length}</h2>
+        <div className="p-3">
+            <h2 className="text-3xl font-bold text-center py-5">Manage User</h2>
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
                     <thead>

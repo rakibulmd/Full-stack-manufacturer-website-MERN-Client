@@ -13,6 +13,7 @@ const MyReview = () => {
     const [rating, setRating] = useState(80);
     const [review, setReview] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [updated, setUpdated] = useState(false);
     useEffect(() => {
         const get = async () => {
             const { data } = await axios.get(
@@ -23,7 +24,7 @@ const MyReview = () => {
             console.log("review", data);
         };
         get();
-    }, [user]);
+    }, [user, updated]);
     const {
         register,
         reset,
@@ -52,6 +53,7 @@ const MyReview = () => {
         if (response?.data?.acknowledged) {
             toast.success("Review Posted!");
             reset();
+            setUpdated(!updated);
         }
     };
     if (loading) {

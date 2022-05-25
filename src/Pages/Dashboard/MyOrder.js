@@ -1,7 +1,14 @@
+import axios from "axios";
+import { signOut } from "firebase/auth";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logoDim from "../../asset/images/logo/logoDim.png";
-const MyOrder = ({ order }) => {
+import auth from "../../firebase.init";
+const MyOrder = ({ order, updated, setUpdated }) => {
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const {
         _id,
         address,
@@ -11,6 +18,28 @@ const MyOrder = ({ order }) => {
         productName,
         productId,
     } = order;
+    const handleDeleteOrder = async (orderId) => {
+        console.log(orderId);
+        try {
+            const response = await axios.delete(
+                `http://localhost:5000/orders/${orderId}?email=${user?.email}`
+            );
+            if (response?.data?.deletedCount) {
+                setUpdated(!updated);
+                toast.success("Order removed");
+            }
+        } catch (error) {
+            if (
+                error.response.status === 401 ||
+                error.response.status === 403
+            ) {
+                navigate("/login");
+                signOut(auth);
+                localStorage.removeItem("accessToken");
+                return;
+            }
+        }
+    };
     return (
         <div
             className="card w-full p-3 shadow-3xl"
@@ -46,7 +75,10 @@ const MyOrder = ({ order }) => {
                         </div>
                     ) : (
                         <div className="card-actions">
-                            <button className="btn btn-error">
+                            <button
+                                className="btn btn-error"
+                                onClick={() => handleDeleteOrder(_id)}
+                            >
                                 Cancel Order
                             </button>
                         </div>

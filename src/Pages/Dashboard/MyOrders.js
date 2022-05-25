@@ -9,6 +9,7 @@ import MyOrder from "./MyOrder";
 const MyOrders = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const [updated, setUpdated] = useState(false);
 
     const [orders, setOrders] = useState([]);
     useEffect(() => {
@@ -32,16 +33,17 @@ const MyOrders = () => {
             }
         };
         getData();
-    }, [user, navigate]);
+    }, [user, navigate, updated]);
     return (
         <div>
             <h2>My Orders</h2>
             <div className="grid grid-cols-1 gap-y-6 p-3">
-                {orders.map((order, index) => (
+                {orders.map((order) => (
                     <MyOrder
                         key={order._id}
                         order={order}
-                        serial={index + 1}
+                        updated={updated}
+                        setUpdated={setUpdated}
                     ></MyOrder>
                 ))}
             </div>

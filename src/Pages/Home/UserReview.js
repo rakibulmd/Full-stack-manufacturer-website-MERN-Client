@@ -25,7 +25,7 @@ class Foo extends Component {
 const UserReview = ({ review }) => {
     const { name, email, title, details, date, img, rating } = review;
     return (
-        <div className="bg-slate-600/10 rounded-xl hover:bg-slate-600/20">
+        <div className="bg-slate-600/10 rounded-xl hover:bg-slate-600/20 relative">
             <div className="p-5">
                 <div className="flex justify-between pb-3 border-b-2 border-gray-600 items-center mb-5">
                     <div>
@@ -39,7 +39,7 @@ const UserReview = ({ review }) => {
                     </div>
                     <p>{date}</p>
                 </div>
-                <div className="pb-3">
+                <div className="pb-12">
                     <h2 className="font-bold py-3">
                         {" "}
                         <cite>{title}</cite>{" "}
@@ -49,7 +49,7 @@ const UserReview = ({ review }) => {
                         <cite>{details}</cite>{" "}
                     </p>
                 </div>
-                <div className="bg-white/75 flex justify-around items-center p-3 rounded-3xl">
+                <div className=" flex justify-end items-center px-2 rounded-3xl absolute bottom-1">
                     <div class="w-16 rounded-xl">
                         <img src={img} alt="" />
                     </div>
