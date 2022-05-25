@@ -2,10 +2,8 @@ import React from "react";
 
 const BusinessSummary = () => {
     return (
-        <div className="container mx-auto bg-gray-700 p-5">
-            <h2 className="text-5xl text-center text-primary my-5 bg-gray-700">
-                We Grow With You!
-            </h2>
+        <div className="container mx-auto bg-slate-300/10 p-5 rounded-3xl">
+            <h2 className="text-5xl text-center  my-5">We Grow With You!</h2>
             <div className="stats shadow flex justify-center bg-white/10 text-white">
                 <div className="stat">
                     <div className="stat-figure text-white">

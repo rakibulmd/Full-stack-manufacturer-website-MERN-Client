@@ -5,7 +5,7 @@ const Product = ({ product }) => {
     const { _id, name, img, description, price, moq, stock, rating } = product;
     const navigate = useNavigate();
     return (
-        <div class="card bg-primary/5 shadow-xl">
+        <div class="card bg-slate-600/10 text-white shadow-3xl">
             <figure class="px-10 pt-10">
                 <img src={img} alt="Shoes" class="rounded-xl" />
             </figure>
@@ -16,8 +16,11 @@ const Product = ({ product }) => {
                     <p>
                         MOQ: {moq} Stock: {stock}
                     </p>
-                    <p>Rating: {rating}</p>
-                    <p>Price: {price}</p>
+
+                    <p className="">
+                        Price:{" "}
+                        <span className="font-bold text-xl">$ {price}</span>
+                    </p>
                 </div>
                 <div class="card-actions">
                     <button

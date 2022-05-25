@@ -25,7 +25,7 @@ class Foo extends Component {
 const UserReview = ({ review }) => {
     const { name, email, title, details, date, img, rating } = review;
     return (
-        <div className="bg-slate-600/10 rounded-xl hover:bg-slate-600/20 relative">
+        <div className="bg-slate-300/10 rounded-xl hover:bg-slate-400/20 relative">
             <div className="p-5">
                 <div className="flex justify-between pb-3 border-b-2 border-gray-600 items-center mb-5">
                     <div>

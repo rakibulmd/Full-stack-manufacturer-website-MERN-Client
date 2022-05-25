@@ -11,6 +11,8 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
     const navigate = useNavigate();
     const {
         _id,
+        name,
+        email,
         address,
         quantity,
         paid,
@@ -79,6 +81,9 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
                     </Link>
                     <h2>Order Id: {_id}</h2>
                 </div>
+                <p className="font-bold pb-3">
+                    Order by: {name}({email})
+                </p>
                 <p>Order Quantity: {quantity}</p>
                 <p>Unit Price: $ {productPrice}</p>
                 <p>Shipping Address: {address}</p>

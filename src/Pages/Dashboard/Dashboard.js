@@ -44,33 +44,59 @@ const Dashboard = () => {
             <div class="drawer-side">
                 <label for="my-drawer-2" class="drawer-overlay"></label>
 
-                <ul class="menu p-4 overflow-y-auto w-44 lg:bg-primary/50 bg-primary  text-base-content">
+                <ul class="menu p-4 overflow-y-auto w-44 bg-slate-900 lg:bg-slate-400/10">
                     {/* <!-- Sidebar content here --> */}
-                    <h2 className="lg:text-center text-3xl text-black">
+                    <h2 className="lg:text-center text-2xl mb-7 uppercase">
                         Dashboard
                     </h2>
-                    <li>
-                        <Link to="/dashboard">My Profile</Link>
+                    <li className="mb-3">
+                        <Link
+                            className="btn btn-primary text-black"
+                            to="/dashboard"
+                        >
+                            My Profile
+                        </Link>
                     </li>
-                    <li>
-                        <Link to="/dashboard/myOrders">My Orders</Link>
+                    <li className="mb-3">
+                        <Link
+                            className="btn btn-primary text-black"
+                            to="/dashboard/myOrders"
+                        >
+                            My Orders
+                        </Link>
                     </li>
-                    <li>
-                        <Link to="/dashboard/myReviews">MyReview</Link>
+                    <li className="mb-3">
+                        <Link
+                            className="btn btn-primary text-black"
+                            to="/dashboard/myReviews"
+                        >
+                            My Review
+                        </Link>
                     </li>
 
                     {isAdmin && (
                         <>
-                            <li>
-                                <Link to="/dashboard/users">Manage Users</Link>
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-primary text-black"
+                                    to="/dashboard/users"
+                                >
+                                    Manage Users
+                                </Link>
                             </li>
-                            <li>
-                                <Link to="/dashboard/allOrders">
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-primary text-black"
+                                    to="/dashboard/allOrders"
+                                >
                                     All Orders
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="/dashboard/addProduct">
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-primary text-black"
+                                    to="/dashboard/addProduct"
+                                >
                                     Add Product
                                 </Link>
                             </li>

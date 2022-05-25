@@ -14,9 +14,9 @@ const UserReviews = () => {
         get();
     }, []);
     return (
-        <div className="container mx-auto p-5 py-12">
-            <h2 className="text-center text-3xl font-bold pb-5">
-                What our customers say...
+        <div className="container mx-auto p-5 py-12 mt-5">
+            <h2 className="text-center text-4xl font-bold pb-5 uppercase">
+                Customers Review
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {reviews.map((review) => (

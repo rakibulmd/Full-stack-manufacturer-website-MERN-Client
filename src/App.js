@@ -20,7 +20,7 @@ import Header from "./Pages/Shared/Header";
 
 function App() {
     return (
-        <div className="font-roboto">
+        <div className="font-roboto bg-secondary text-white">
             <Header></Header>
             <Routes>
                 <Route path="/" element={<Home></Home>}></Route>

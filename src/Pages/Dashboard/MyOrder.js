@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoDim from "../../asset/images/logo/logoDim.png";
 import auth from "../../firebase.init";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { IconContext } from "react-icons";
 const MyOrder = ({ order, updated, setUpdated }) => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
@@ -14,6 +16,7 @@ const MyOrder = ({ order, updated, setUpdated }) => {
         address,
         quantity,
         paid,
+        shipped,
         productPrice,
         productName,
         productId,
@@ -42,12 +45,12 @@ const MyOrder = ({ order, updated, setUpdated }) => {
     };
     return (
         <div
-            className="card w-full p-3 shadow-3xl"
+            className="card w-full shadow-3xl"
             style={{
                 background: `url(${logoDim}) no-repeat`,
             }}
         >
-            <div className="card-bod">
+            <div className="card-body">
                 <div className="lg:flex justify-between">
                     <Link to={`/purchase/${productId}`} className="card-title">
                         {productName}
@@ -60,21 +63,31 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                 <div className="flex gap-3">
                     {paid ? (
                         <div className="card-actions">
-                            <button className="btn btn-success">Paid</button>
+                            {shipped ? (
+                                <button className="btn btn-success">
+                                    Order Completed{" "}
+                                    <IconContext.Provider
+                                        value={{
+                                            className:
+                                                "w-6 h-6 ml-2 text-black",
+                                        }}
+                                    >
+                                        <div>
+                                            <FaCheckCircle />
+                                        </div>
+                                    </IconContext.Provider>
+                                </button>
+                            ) : (
+                                <div className="card-actions">
+                                    <button className="btn btn-info">
+                                        Pending Shipment
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <div className="card-actions">
                             <button className="btn btn-primary">Pay Now</button>
-                        </div>
-                    )}
-                    {paid ? (
-                        <div className="card-actions">
-                            <button className="btn btn-info">
-                                Pending Shipment
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="card-actions">
                             <button
                                 className="btn btn-error"
                                 onClick={() => handleDeleteOrder(_id)}
@@ -91,7 +104,7 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                     <li className={paid ? "step step-primary" : "step"}>
                         Payment
                     </li>
-                    <li className={paid ? "step step-primary" : "step"}>
+                    <li className={shipped ? "step step-primary" : "step"}>
                         Receive Product
                     </li>
                 </ul>
