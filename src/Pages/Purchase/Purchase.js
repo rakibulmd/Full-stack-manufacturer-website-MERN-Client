@@ -70,15 +70,6 @@ const Purchase = () => {
         if (response?.data?.insertedId) {
             toast.success("Order placed successfully");
             reset();
-            // const { data } = await axios.put(
-            //     `http://localhost:5000/products/${product._id}`,
-            //     {
-            //         stock: product.stock - parseInt(purchaseData.quantity),
-            //     }
-            // );
-            // if (data?.acknowledged) {
-            //     setUpdated(!updated);
-            // }
         }
     };
     // if (isLoading) {

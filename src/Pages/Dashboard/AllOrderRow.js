@@ -1,7 +1,8 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import logoDim from "../../asset/images/logo/logoDim.png";
-const AllOrderRow = ({ order }) => {
+const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
     const {
         _id,
         address,
@@ -11,6 +12,16 @@ const AllOrderRow = ({ order }) => {
         productName,
         productId,
     } = order;
+    const handleShipment = async (productId, orderId) => {
+        console.log(productId, orderId);
+        const response = await axios.put(
+            `http://localhost:5000/orders/${orderId}`
+        );
+        console.log(response);
+        if (response?.data?.modifiedCount) {
+            setOrderUpdated(!orderUpdated);
+        }
+    };
     return (
         <div
             className="card w-full p-3 shadow-3xl"
@@ -20,7 +31,10 @@ const AllOrderRow = ({ order }) => {
         >
             <div className="card-bod">
                 <div className="lg:flex justify-between">
-                    <Link to={`/purchase/${productId}`} className="card-title">
+                    <Link
+                        to={`/purchase/${productId}`}
+                        className="card-title underline"
+                    >
                         {productName}
                     </Link>
                     <h2>Order Id: {_id}</h2>
@@ -31,9 +45,20 @@ const AllOrderRow = ({ order }) => {
                 <div className="flex gap-3">
                     {paid ? (
                         <div className="card-actions">
-                            <button className="btn btn-success">
-                                Pending Shipment
-                            </button>
+                            {order?.shipped ? (
+                                <button className="btn btn-disabled">
+                                    Shipped
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        handleShipment(productId, _id);
+                                    }}
+                                    className="btn btn-success"
+                                >
+                                    Pending Shipment
+                                </button>
+                            )}
                         </div>
                     ) : (
                         <div className="card-actions">
@@ -51,13 +76,16 @@ const AllOrderRow = ({ order }) => {
                 </div>
 
                 <ul className="steps mt-3">
-                    <li className="step step-primary">Register</li>
-                    <li className="step step-primary">Place Order</li>
+                    <li className="step step-primary">Order</li>
                     <li className={paid ? "step step-primary" : "step"}>
                         Payment
                     </li>
-                    <li className={paid ? "step step-primary" : "step"}>
-                        Receive Product
+                    <li
+                        className={
+                            order?.shipped ? "step step-primary" : "step"
+                        }
+                    >
+                        Shipment
                     </li>
                 </ul>
             </div>
