@@ -18,9 +18,6 @@ const Dashboard = () => {
                         Open drawer
                     </label>{" "} */}
 
-                    <h2 className="lg:text-center text-3xl text-black">
-                        Your Dashboard
-                    </h2>
                     <label
                         tabIndex="1"
                         for="my-drawer-2"
