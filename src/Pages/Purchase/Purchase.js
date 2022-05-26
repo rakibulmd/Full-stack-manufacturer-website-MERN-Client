@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import useAdmin from "../../Hooks/useAdmin";
@@ -13,6 +13,7 @@ const Purchase = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
     const [isAdmin] = useAdmin(user);
+    const navigate = useNavigate();
 
     const [product, setProduct] = useState({});
     useEffect(() => {
@@ -54,7 +55,6 @@ const Purchase = () => {
         purchaseData.productName = product.name;
         purchaseData.productId = product._id;
         purchaseData.productPrice = product.price;
-        console.log(purchaseData);
         const response = await axios.post(
             "http://localhost:5000/orders",
             purchaseData
@@ -63,6 +63,7 @@ const Purchase = () => {
         if (response?.data?.insertedId) {
             toast.success("Order placed successfully");
             reset();
+            navigate("/dashboard/myOrders");
         }
     };
 
@@ -104,7 +105,6 @@ const Purchase = () => {
                                 value={user?.displayName}
                                 id="name"
                                 readOnly
-                                disabled
                                 autoComplete="off"
                                 {...register("name")}
                             />
@@ -120,7 +120,6 @@ const Purchase = () => {
                                 className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
                                 type="email"
                                 id="email"
-                                disabled
                                 value={user?.email}
                                 readOnly
                                 autoComplete="off"

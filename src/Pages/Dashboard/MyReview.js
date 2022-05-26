@@ -21,7 +21,6 @@ const MyReview = () => {
             );
             setReview(data);
             setLoading(false);
-            console.log("review", data);
         };
         get();
     }, [user, updated]);

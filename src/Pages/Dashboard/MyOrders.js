@@ -2,7 +2,7 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import MyOrder from "./MyOrder";
 
@@ -10,7 +10,6 @@ const MyOrders = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const [updated, setUpdated] = useState(false);
-
     const [orders, setOrders] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -36,17 +35,32 @@ const MyOrders = () => {
     }, [user, navigate, updated]);
     return (
         <div>
-            <h2>My Orders</h2>
-            <div className="grid grid-cols-1 gap-y-8 p-3">
-                {orders.map((order) => (
-                    <MyOrder
-                        key={order._id}
-                        order={order}
-                        updated={updated}
-                        setUpdated={setUpdated}
-                    ></MyOrder>
-                ))}
-            </div>
+            <h2 className="text-3xl uppercase font-bold text-center py-5">
+                My Orders
+            </h2>
+            {orders.length === 0 ? (
+                <div>
+                    <h2 className="text-center text-xl py-5">
+                        You do not have any orders
+                    </h2>
+                    <div className="flex justify-center">
+                        <Link to="/allProducts" className="btn btn-primary">
+                            Order Now
+                        </Link>
+                    </div>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 gap-y-8 p-3">
+                    {orders.map((order) => (
+                        <MyOrder
+                            key={order._id}
+                            order={order}
+                            updated={updated}
+                            setUpdated={setUpdated}
+                        ></MyOrder>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

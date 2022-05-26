@@ -8,9 +8,13 @@ import logoDim from "../../asset/images/logo/logoDim.png";
 import auth from "../../firebase.init";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 const MyOrder = ({ order, updated, setUpdated }) => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
     const {
         _id,
         address,
@@ -21,27 +25,42 @@ const MyOrder = ({ order, updated, setUpdated }) => {
         productName,
         productId,
     } = order;
-    const handleDeleteOrder = async (orderId) => {
-        console.log(orderId);
-        try {
-            const response = await axios.delete(
-                `http://localhost:5000/orders/${orderId}?email=${user?.email}`
-            );
-            if (response?.data?.deletedCount) {
-                setUpdated(!updated);
-                toast.success("Order removed");
+    const handleDeleteOrder = async (orderId, productName) => {
+        MySwal.fire({
+            title: "Are you sure?",
+            text: `Delete: ${productName}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.delete(
+                        `http://localhost:5000/orders/${orderId}?email=${user?.email}`
+                    );
+                    if (response?.data?.deletedCount) {
+                        setUpdated(!updated);
+                        MySwal.fire(
+                            "Deleted!",
+                            "Your file has been deleted.",
+                            "success"
+                        );
+                    }
+                } catch (error) {
+                    if (
+                        error.response.status === 401 ||
+                        error.response.status === 403
+                    ) {
+                        navigate("/login");
+                        signOut(auth);
+                        localStorage.removeItem("accessToken");
+                        return;
+                    }
+                }
             }
-        } catch (error) {
-            if (
-                error.response.status === 401 ||
-                error.response.status === 403
-            ) {
-                navigate("/login");
-                signOut(auth);
-                localStorage.removeItem("accessToken");
-                return;
-            }
-        }
+        });
     };
     return (
         <div
@@ -90,7 +109,9 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                             <button className="btn btn-primary">Pay Now</button>
                             <button
                                 className="btn btn-error"
-                                onClick={() => handleDeleteOrder(_id)}
+                                onClick={() =>
+                                    handleDeleteOrder(_id, productName)
+                                }
                             >
                                 Cancel Order
                             </button>
