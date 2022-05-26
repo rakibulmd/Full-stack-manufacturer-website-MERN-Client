@@ -5,31 +5,46 @@ import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const UserRow = ({ rowUser, updated, setUpdated }) => {
     const { img, role, email, name } = rowUser;
     const [user] = useAuthState(auth);
+    const MySwal = withReactContent(Swal);
     const handleAdminBtn = async (userEmail) => {
-        try {
-            const response = await axios.put(
-                `http://localhost:5000/users/admin?email=${user.email}`,
-                {
-                    email: userEmail,
+        MySwal.fire({
+            title: "Are you sure?",
+            text: `Make admin ?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make Admin!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.put(
+                        `http://localhost:5000/users/admin?email=${user.email}`,
+                        {
+                            email: userEmail,
+                        }
+                    );
+                    if (response.data.modifiedCount) {
+                        setUpdated(!updated);
+                        MySwal.fire("Success!");
+                    }
+                } catch (error) {
+                    if (
+                        error.response.status === 401 ||
+                        error.response.status === 403
+                    ) {
+                        toast.error("Unauthorized!");
+                        return;
+                    }
                 }
-            );
-            if (response.data.modifiedCount) {
-                setUpdated(!updated);
-                toast.success("Successfully added as Admin");
             }
-        } catch (error) {
-            if (
-                error.response.status === 401 ||
-                error.response.status === 403
-            ) {
-                toast.error("Unauthorized!");
-                return;
-            }
-        }
+        });
     };
 
     return (
