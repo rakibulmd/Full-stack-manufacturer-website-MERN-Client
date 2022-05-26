@@ -7,6 +7,7 @@ import Blogs from "./Pages/Blogs/Blogs";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import AllOrders from "./Pages/Dashboard/AllOrders";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyReview from "./Pages/Dashboard/MyReview";
@@ -64,6 +65,14 @@ function App() {
                         element={
                             <RequireAdmin>
                                 <AllOrders></AllOrders>
+                            </RequireAdmin>
+                        }
+                    ></Route>
+                    <Route
+                        path="manageProducts"
+                        element={
+                            <RequireAdmin>
+                                <ManageProducts></ManageProducts>
                             </RequireAdmin>
                         }
                     ></Route>

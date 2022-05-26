@@ -55,22 +55,26 @@ const Dashboard = () => {
                             My Profile
                         </Link>
                     </li>
-                    <li className="mb-3">
-                        <Link
-                            className="btn btn-outline"
-                            to="/dashboard/myOrders"
-                        >
-                            My Orders
-                        </Link>
-                    </li>
-                    <li className="mb-3">
-                        <Link
-                            className="btn btn-outline"
-                            to="/dashboard/myReviews"
-                        >
-                            My Review
-                        </Link>
-                    </li>
+                    {!isAdmin && (
+                        <>
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-outline"
+                                    to="/dashboard/myOrders"
+                                >
+                                    My Orders
+                                </Link>
+                            </li>
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-outline"
+                                    to="/dashboard/myReviews"
+                                >
+                                    My Review
+                                </Link>
+                            </li>
+                        </>
+                    )}
 
                     {isAdmin && (
                         <>
@@ -87,7 +91,15 @@ const Dashboard = () => {
                                     className="btn btn-outline"
                                     to="/dashboard/allOrders"
                                 >
-                                    All Orders
+                                    Manage All Orders
+                                </Link>
+                            </li>
+                            <li className="mb-3">
+                                <Link
+                                    className="btn btn-outline"
+                                    to="/dashboard/manageProducts"
+                                >
+                                    Manage Products
                                 </Link>
                             </li>
                             <li className="mb-3">

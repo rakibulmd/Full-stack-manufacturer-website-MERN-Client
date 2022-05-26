@@ -6,9 +6,7 @@ const UserReviews = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
         const get = async () => {
-            const { data } = await axios.get(
-                `http://localhost:5000/reviews?limit=6`
-            );
+            const { data } = await axios.get(`http://localhost:5000/reviews`);
             setReviews(data);
         };
         get();
