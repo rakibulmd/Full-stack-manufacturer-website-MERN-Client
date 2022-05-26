@@ -75,10 +75,12 @@ const CheckoutForm = ({ order }) => {
             setTransactionId(paymentIntent.id);
             await axios.put(`http://localhost:5000/orders/${_id}`, {
                 paid: true,
-                transactionId: transactionId,
+                transactionId: paymentIntent.id,
             });
             setPaymentLoading(false);
-            MySwal.fire("Congrats! Your payment is successful");
+            MySwal.fire(
+                `"Congrats! Your payment is successful and transaction id is: ${paymentIntent.id}`
+            );
             setSuccess("Congrats! Your payment is successful");
             navigate("/dashboard/myOrders");
         }

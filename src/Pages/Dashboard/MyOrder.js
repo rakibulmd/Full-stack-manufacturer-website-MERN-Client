@@ -74,7 +74,10 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                     <Link to={`/purchase/${productId}`} className="card-title">
                         {productName}
                     </Link>
-                    <h2>Order Id: {_id}</h2>
+                    <div>
+                        <h2>Order Id: {_id}</h2>
+                        <h2>TXN Id: {order?.transactionId}</h2>
+                    </div>
                 </div>
                 <p>Order Quantity: {quantity}</p>
                 <p>Unit Price: $ {productPrice}</p>
