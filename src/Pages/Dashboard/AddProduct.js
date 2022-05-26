@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
@@ -7,10 +7,12 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../Shared/Loading";
 
 const AddProduct = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const {
         register,
         formState: { errors },
@@ -19,6 +21,7 @@ const AddProduct = () => {
     } = useForm();
     const imgBBKey = "ef3f2d60caa94b223266f9efbfea12b8";
     const onSubmit = async (data) => {
+        setLoading(true);
         const image = data.img[0];
         const formData = new FormData();
         formData.append("image", image);
@@ -44,6 +47,7 @@ const AddProduct = () => {
                             if (response?.data.insertedId) {
                                 toast.success("Item added successfully");
                                 reset();
+                                setLoading(false);
                             }
                         };
                         post();
@@ -249,11 +253,19 @@ const AddProduct = () => {
                         )}
                     </div>
 
-                    <input
-                        className="w-full bg-primary hover:bg-emerald-500 active:bg-emerald-600 px-5 py-2 rounded-md text-black tracking-wide"
-                        type="submit"
-                        value="Add Item"
-                    />
+                    {loading ? (
+                        <div className="flex justify-center  py-3">
+                            <span className="w-20 h-10">
+                                <Loading></Loading>
+                            </span>
+                        </div>
+                    ) : (
+                        <input
+                            className="w-full bg-primary hover:bg-emerald-500 active:bg-emerald-600 px-5 py-2 rounded-md text-black tracking-wide"
+                            type="submit"
+                            value="Add Item"
+                        />
+                    )}
                 </form>
             </div>
         </div>

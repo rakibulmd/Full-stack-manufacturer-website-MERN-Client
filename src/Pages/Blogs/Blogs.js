@@ -16,8 +16,10 @@ const Blogs = () => {
     }, []);
     if (!questionAndAnswers) {
         return (
-            <div className="mx-auto w-48 h-screen">
-                <Loading></Loading>
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
             </div>
         );
     }
