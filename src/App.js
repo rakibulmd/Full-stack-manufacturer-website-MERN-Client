@@ -17,6 +17,7 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import RequireAdmin from "./Pages/Login/RequireAdmin";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import ResetPassword from "./Pages/Login/ResetPassword";
 import MyPortfolio from "./Pages/My Portfolio/MyPortfolio";
 import Purchase from "./Pages/Purchase/Purchase";
 import Header from "./Pages/Shared/Header";
@@ -96,6 +97,10 @@ function App() {
                     }
                 ></Route>
                 <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+                <Route
+                    path="/resetpassword"
+                    element={<ResetPassword></ResetPassword>}
+                ></Route>
                 <Route
                     path="/myPortfolio"
                     element={<MyPortfolio></MyPortfolio>}

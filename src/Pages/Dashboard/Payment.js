@@ -47,7 +47,7 @@ const Payment = () => {
                         {order?.productPrice * order?.quantity}
                     </p>
                 </div>
-                <div className="py-5 bg-white text-black ">
+                <div className="py-5 bg-white/75 mt-5 rounded-lg text-black">
                     <Elements stripe={stripePromise}>
                         <CheckoutForm order={order} />
                     </Elements>

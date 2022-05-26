@@ -4,6 +4,7 @@ import Statusbar from "../Shared/Statusbar";
 import Banner from "./Banner";
 import BusinessSummary from "./BusinessSummary";
 import Feature from "./Feature";
+import Newsletter from "./Newsletter";
 import Products from "./Products";
 import UserReviews from "./UserReviews";
 
@@ -15,6 +16,7 @@ const Home = () => {
             <Products></Products>
             <BusinessSummary></BusinessSummary>
             <UserReviews></UserReviews>
+            <Newsletter></Newsletter>
             <Footer></Footer>
         </div>
     );

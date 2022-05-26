@@ -103,7 +103,12 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
                     >
                         {productName}
                     </Link>
-                    <h2>Order Id: {_id}</h2>
+                    <div>
+                        <h2>Order Id: {_id}</h2>
+                        {order?.transactionId && (
+                            <h2>TXN Id: {order?.transactionId}</h2>
+                        )}
+                    </div>
                 </div>
                 <p className="font-bold pb-3">
                     Order by: {name}({email})

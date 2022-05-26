@@ -3,7 +3,7 @@ import React from "react";
 const MyPortfolio = () => {
     return (
         <div className="bg-secondary">
-            <div className="container mx-auto mt-7">
+            <div className="container mx-auto mt-7 p-2">
                 <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold uppercase text-center">
                     MD. Rakibul Islam
                 </h2>

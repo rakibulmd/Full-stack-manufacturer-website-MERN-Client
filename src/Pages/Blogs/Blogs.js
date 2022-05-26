@@ -16,7 +16,7 @@ const Blogs = () => {
     }, []);
     if (!questionAndAnswers) {
         return (
-            <div className="mx-auto w-48 h-48">
+            <div className="mx-auto w-48 h-screen">
                 <Loading></Loading>
             </div>
         );

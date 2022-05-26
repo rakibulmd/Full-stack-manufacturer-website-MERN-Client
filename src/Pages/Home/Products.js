@@ -16,7 +16,7 @@ const Products = () => {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center">
-                <div className="w-40 h-40 mx-auto">
+                <div className="w-40 h-screen mx-auto">
                     <Loading></Loading>
                 </div>
             </div>

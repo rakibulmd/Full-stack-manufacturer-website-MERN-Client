@@ -76,7 +76,9 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                     </Link>
                     <div>
                         <h2>Order Id: {_id}</h2>
-                        <h2>TXN Id: {order?.transactionId}</h2>
+                        {order?.transactionId && (
+                            <h2>TXN Id: {order?.transactionId}</h2>
+                        )}
                     </div>
                 </div>
                 <p>Order Quantity: {quantity}</p>

@@ -50,11 +50,13 @@ const MyProfile = () => {
                         </div>
                     )}
                     <div>
-                        <h2>{user?.displayName}</h2>
+                        <h2 className="font-bold text-xl">
+                            {user?.displayName}
+                        </h2>
                         <h2>{user?.email}</h2>
                     </div>
                 </div>
-                <div className="p-2 text-center text-lg">
+                <div className="p-2 text-left text-xl">
                     {userData?.data?.location && (
                         <h2>Location: {userData?.data?.location}</h2>
                     )}
@@ -70,6 +72,9 @@ const MyProfile = () => {
                 </div>
                 <div>
                     <div className="max-w-[500px] mx-auto py-5">
+                        <h2 className="text-3xl font-bold mt-5  text-center pb-3">
+                            Update Your Info
+                        </h2>
                         <form
                             className="p-5 bg-slate-600/40 rounded-md border border-emerald-500 animate__animated animate__fadeInUp animate__faster"
                             onSubmit={handleSubmit(onSubmit)}

@@ -70,6 +70,7 @@ const CheckoutForm = ({ order }) => {
             });
         if (intentError) {
             setPaymentError(intentError?.message);
+            setPaymentLoading(false);
         } else {
             setPaymentError("");
             setTransactionId(paymentIntent.id);
@@ -79,7 +80,7 @@ const CheckoutForm = ({ order }) => {
             });
             setPaymentLoading(false);
             MySwal.fire(
-                `"Congrats! Your payment is successful and transaction id is: ${paymentIntent.id}`
+                `"Your payment is successful and transaction id is: ${paymentIntent.id}`
             );
             setSuccess("Congrats! Your payment is successful");
             navigate("/dashboard/myOrders");
@@ -105,19 +106,20 @@ const CheckoutForm = ({ order }) => {
                         },
                     }}
                 />
-                {paymentLoading ? (
-                    <span className="w-8">
-                        <Loading></Loading>
-                    </span>
-                ) : (
-                    <button
-                        className="btn btn-primary mt-3 btn-sm"
-                        type="submit"
-                        disabled={!stripe || !clientSecret}
-                    >
-                        Pay
-                    </button>
-                )}
+
+                <button
+                    className="btn btn-primary mt-3 btn-sm"
+                    type="submit"
+                    disabled={!stripe || !clientSecret}
+                >
+                    {paymentLoading ? (
+                        <div className="w-8 h-8">
+                            <Loading></Loading>
+                        </div>
+                    ) : (
+                        "Pay"
+                    )}
+                </button>
             </form>
             {paymentError && (
                 <p className="text-rose-500 py-2">{paymentError}</p>
