@@ -65,24 +65,19 @@ const AddProduct = () => {
     };
 
     return (
-        <div
-            className="container mx-auto"
-            style={{
-                background: `url(${logoDim}) no-repeat center center/cover`,
-            }}
-        >
+        <div className="container mx-auto ">
             <h2 className="text-2xl font-bold uppercase pt-10 text-center">
                 Add A Product
             </h2>
             <div className="max-w-[500px] mx-auto py-5">
                 <form
-                    className="p-5 bg-darkbg rounded-md border border-emerald-500 animate__animated animate__fadeInUp animate__faster"
+                    className="p-5 bg-slate-600/30 rounded-md border border-emerald-500 animate__animated animate__fadeInUp animate__faster"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div className="mb-7">
                         <label
                             htmlFor="name"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Product Name:
                         </label>
@@ -103,37 +98,17 @@ const AddProduct = () => {
                             </span>
                         )}
                     </div>
-                    {/* <div className="mb-7">
-                        <label
-                            htmlFor="img"
-                            className="block mb-2 text-sm font-medium text-secondary"
-                        >
-                            Image URL:
-                        </label>
-                        <input
-                            id="img"
-                            className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
-                            placeholder="eg: https://i.ibb.co/fnkyFJg/btmark.png"
-                            type="url"
-                            autoComplete="off"
-                            {...register("img", { required: true })}
-                        />
-                        {errors.img && (
-                            <span className="text-rose-600">
-                                URL is required.
-                            </span>
-                        )}
-                    </div> */}
+
                     <div className="mb-7">
                         <label
                             htmlFor="description"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Select Category
                         </label>
                         <select
                             {...register("category")}
-                            className="select select-primary block w-full p-2.5"
+                            className="select select-primary text-black block w-full p-2.5"
                         >
                             <option value="transistor">Transistor</option>
                             <option value="sensor">Sensor</option>
@@ -145,7 +120,7 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="description"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Short Description:
                         </label>
@@ -169,7 +144,7 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="price"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Item Price:
                         </label>
@@ -191,7 +166,7 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="quantity"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Initial Stock:
                         </label>
@@ -216,7 +191,7 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="sold"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Min Order Quantity:{" "}
                         </label>
@@ -240,7 +215,7 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="email"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Authorized Email:
                         </label>
@@ -256,12 +231,12 @@ const AddProduct = () => {
                     <div className="mb-7">
                         <label
                             htmlFor="sold"
-                            className="block mb-2 text-sm font-medium text-secondary"
+                            className="block mb-2 text-sm font-medium"
                         >
                             Upload Image:
                         </label>
                         <input
-                            className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block p-2.5  placeholder-secondary/75 text-black  border-secondary"
+                            className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block p-2.5  placeholder-secondary/75   border-white"
                             type="file"
                             {...register("img", {
                                 required: true,
