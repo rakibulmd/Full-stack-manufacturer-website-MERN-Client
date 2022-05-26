@@ -20,6 +20,7 @@ import RequireAuth from "./Pages/Login/RequireAuth";
 import MyPortfolio from "./Pages/My Portfolio/MyPortfolio";
 import Purchase from "./Pages/Purchase/Purchase";
 import Header from "./Pages/Shared/Header";
+import NotFound from "./Pages/Shared/NotFound";
 
 function App() {
     return (
@@ -99,6 +100,7 @@ function App() {
                     path="/myPortfolio"
                     element={<MyPortfolio></MyPortfolio>}
                 ></Route>
+                <Route path="*" element={<NotFound></NotFound>}></Route>
             </Routes>
 
             <ToastContainer
