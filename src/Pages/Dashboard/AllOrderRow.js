@@ -4,11 +4,13 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import logoDim from "../../asset/images/logo/logoDim.png";
 import auth from "../../firebase.init";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
     const {
         _id,
         name,
@@ -21,34 +23,54 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
         productId,
     } = order;
     const handleShipment = async (productId, orderId) => {
-        try {
-            const response = await axios.put(
-                `http://localhost:5000/products/${productId}?email=${user?.email}&quantity=${quantity}`
-            );
-            if (response?.data?.modifiedCount) {
-                setOrderUpdated(!orderUpdated);
-                await axios.put(`http://localhost:5000/orders/${orderId}`, {
-                    shipped: true,
-                });
+        MySwal.fire({
+            title: "Are you sure?",
+            text: `Deliver: ${productName}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, confirm shipment!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.put(
+                        `https://mpt-server.herokuapp.com/products/${productId}?email=${user?.email}&quantity=${quantity}`
+                    );
+                    if (response?.data?.modifiedCount) {
+                        setOrderUpdated(!orderUpdated);
+                        await axios.put(
+                            `https://mpt-server.herokuapp.com/orders/${orderId}`,
+                            {
+                                shipped: true,
+                            }
+                        );
+                        MySwal.fire(
+                            "Shipped!",
+                            "Order completed successfully.",
+                            "success"
+                        );
+                    }
+                } catch (error) {
+                    if (error.response.status === 406) {
+                        toast.error("Insufficient Stock to shipment!");
+                    } else if (
+                        error.response.status === 401 ||
+                        error.response.status === 403
+                    ) {
+                        navigate("/login");
+                        signOut(auth);
+                        localStorage.removeItem("accessToken");
+                        return;
+                    }
+                }
             }
-        } catch (error) {
-            if (error.response.status === 406) {
-                toast.error("Insufficient Stock to shipment!");
-            } else if (
-                error.response.status === 401 ||
-                error.response.status === 403
-            ) {
-                navigate("/login");
-                signOut(auth);
-                localStorage.removeItem("accessToken");
-                return;
-            }
-        }
+        });
     };
     const handleDeleteOrder = async (orderId) => {
         try {
             const response = await axios.delete(
-                `http://localhost:5000/orders/${orderId}?email=${user?.email}`
+                `https://mpt-server.herokuapp.com/orders/${orderId}?email=${user?.email}`
             );
             if (response?.data?.deletedCount) {
                 setOrderUpdated(!orderUpdated);

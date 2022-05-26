@@ -15,7 +15,7 @@ const MyOrders = () => {
         const getData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/myOrders?email=${user?.email}`
+                    `https://mpt-server.herokuapp.com/myOrders?email=${user?.email}`
                 );
 
                 setOrders(response?.data);

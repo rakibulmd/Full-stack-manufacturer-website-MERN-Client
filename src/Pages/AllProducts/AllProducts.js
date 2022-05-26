@@ -10,7 +10,9 @@ const AllProducts = () => {
         isLoading,
         error,
     } = useQuery("products", () =>
-        fetch("http://localhost:5000/products").then((res) => res.json())
+        fetch("https://mpt-server.herokuapp.com/products").then((res) =>
+            res.json()
+        )
     );
     if (isLoading) {
         return (

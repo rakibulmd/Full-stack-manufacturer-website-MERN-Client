@@ -14,7 +14,9 @@ const ManageProducts = () => {
 
     useEffect(() => {
         const get = async () => {
-            const { data } = await axios.get("http://localhost:5000/products");
+            const { data } = await axios.get(
+                "https://mpt-server.herokuapp.com/products"
+            );
             setProducts(data);
         };
         get();
@@ -32,7 +34,7 @@ const ManageProducts = () => {
             if (result.isConfirmed) {
                 try {
                     const { data } = await axios.delete(
-                        `http://localhost:5000/products/delete/${id}?email=${user?.email}`
+                        `https://mpt-server.herokuapp.com/products/delete/${id}?email=${user?.email}`
                     );
                     if (data.deletedCount) {
                         setUpdated(!updated);
@@ -59,8 +61,8 @@ const ManageProducts = () => {
         <div>
             <h2 className="text-3xl text-center py-5">Manage Products</h2>
             <div>
-                <div class="overflow-x-auto p-3">
-                    <table class="table table-zebra w-full text-black">
+                <div className="overflow-x-auto p-3">
+                    <table className="table table-zebra w-full text-black">
                         {/* <!-- head --> */}
                         <thead>
                             <tr>

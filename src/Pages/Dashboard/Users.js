@@ -16,7 +16,7 @@ const Users = () => {
         const getData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/users?email=${user?.email}`
+                    `https://mpt-server.herokuapp.com/users?email=${user?.email}`
                 );
 
                 setUsers(response?.data);
@@ -38,8 +38,8 @@ const Users = () => {
     return (
         <div className="p-3">
             <h2 className="text-3xl font-bold text-center py-5">Manage User</h2>
-            <div class="overflow-x-auto w-full">
-                <table class="table w-full text-black">
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full text-black">
                     <thead>
                         <tr>
                             <th>Name</th>

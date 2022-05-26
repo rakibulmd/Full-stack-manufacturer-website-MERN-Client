@@ -26,7 +26,7 @@ const CheckoutForm = ({ order }) => {
     useEffect(() => {
         const post = async () => {
             const { data } = await axios.post(
-                `http://localhost:5000/create-payment-intent`,
+                `https://mpt-server.herokuapp.com/create-payment-intent`,
                 {
                     price,
                 }
@@ -73,7 +73,7 @@ const CheckoutForm = ({ order }) => {
         } else {
             setPaymentError("");
             setTransactionId(paymentIntent.id);
-            await axios.put(`http://localhost:5000/orders/${_id}`, {
+            await axios.put(`https://mpt-server.herokuapp.com/orders/${_id}`, {
                 paid: true,
                 transactionId: paymentIntent.id,
             });

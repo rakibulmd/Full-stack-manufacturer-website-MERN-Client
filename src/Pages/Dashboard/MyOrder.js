@@ -38,7 +38,7 @@ const MyOrder = ({ order, updated, setUpdated }) => {
             if (result.isConfirmed) {
                 try {
                     const response = await axios.delete(
-                        `http://localhost:5000/orders/${orderId}?email=${user?.email}`
+                        `https://mpt-server.herokuapp.com/orders/${orderId}?email=${user?.email}`
                     );
                     if (response?.data?.deletedCount) {
                         setUpdated(!updated);
@@ -102,7 +102,7 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                             ) : (
                                 <div className="card-actions">
                                     <button className="btn btn-info">
-                                        Pending Shipment
+                                        Processing Shipment
                                     </button>
                                 </div>
                             )}

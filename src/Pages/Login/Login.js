@@ -66,7 +66,6 @@ const Login = () => {
     useEffect(() => {
         if (token) {
             navigate(from, { replace: true });
-            console.log("redirect", from);
             toast.success("Signed In Successfully.");
         }
     }, [from, navigate, logInUser, registerUser, googleUser, token]);

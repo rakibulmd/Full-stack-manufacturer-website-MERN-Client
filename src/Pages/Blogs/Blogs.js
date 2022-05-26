@@ -7,7 +7,9 @@ const Blogs = () => {
     const [questionAndAnswers, setQuestionAndAnswers] = useState(null);
     useEffect(() => {
         const get = async () => {
-            const { data } = await axios.get("http://localhost:5000/qna");
+            const { data } = await axios.get(
+                "https://mpt-server.herokuapp.com/qna"
+            );
             setQuestionAndAnswers(data);
         };
         get();

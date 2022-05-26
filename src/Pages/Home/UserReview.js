@@ -50,7 +50,7 @@ const UserReview = ({ review }) => {
                     </p>
                 </div>
                 <div className=" flex justify-end items-center px-2 rounded-3xl absolute bottom-1">
-                    <div class="w-16 rounded-xl">
+                    <div className="w-16 rounded-xl">
                         <img src={img} alt="" />
                     </div>
                     <div>

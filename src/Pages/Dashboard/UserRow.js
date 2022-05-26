@@ -25,7 +25,7 @@ const UserRow = ({ rowUser, updated, setUpdated }) => {
             if (result.isConfirmed) {
                 try {
                     const response = await axios.put(
-                        `http://localhost:5000/users/admin?email=${user.email}`,
+                        `https://mpt-server.herokuapp.com/users/admin?email=${user.email}`,
                         {
                             email: userEmail,
                         }
@@ -50,14 +50,14 @@ const UserRow = ({ rowUser, updated, setUpdated }) => {
     return (
         <tr>
             <td>
-                <div class="flex items-center space-x-3">
-                    <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
+                <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
                             <img src={img} alt="user" />
                         </div>
                     </div>
                     <div>
-                        <div class="font-bold">
+                        <div className="font-bold">
                             {name ? name : "Login to update"}
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const UserRow = ({ rowUser, updated, setUpdated }) => {
                     onClick={() => {
                         handleAdminBtn(email);
                     }}
-                    class="btn btn-warning"
+                    className="btn btn-warning"
                     disabled={role === "admin"}
                 >
                     Make Admin

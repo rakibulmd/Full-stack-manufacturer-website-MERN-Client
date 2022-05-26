@@ -17,7 +17,7 @@ const MyReview = () => {
     useEffect(() => {
         const get = async () => {
             const { data } = await axios.get(
-                `http://localhost:5000/myReview?email=${user?.email}`
+                `https://mpt-server.herokuapp.com/myReview?email=${user?.email}`
             );
             setReview(data);
             setLoading(false);
@@ -40,13 +40,13 @@ const MyReview = () => {
             .splice(1, 3)
             .join(" ");
         const { data } = await axios.get(
-            `http://localhost:5000/user?email=${user?.email}`
+            `https://mpt-server.herokuapp.com/user?email=${user?.email}`
         );
         reviewData.img = data.img;
         reviewData.rating = rating / 20;
 
         const response = await axios.put(
-            `http://localhost:5000/review?email=${user?.email}`,
+            `https://mpt-server.herokuapp.com/review?email=${user?.email}`,
             reviewData
         );
         if (response?.data?.acknowledged) {

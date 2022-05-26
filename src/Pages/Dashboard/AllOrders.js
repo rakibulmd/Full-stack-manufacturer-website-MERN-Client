@@ -16,11 +16,10 @@ const AllOrders = () => {
         const getData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/dashboard/allOrders?email=${user?.email}`
+                    `https://mpt-server.herokuapp.com/dashboard/allOrders?email=${user?.email}`
                 );
 
                 setAllOrders(response?.data);
-                console.log(response.data);
             } catch (error) {
                 if (
                     error.response.status === 401 ||

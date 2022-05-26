@@ -9,7 +9,7 @@ const Products = () => {
         isLoading,
         error,
     } = useQuery("products", () =>
-        fetch("http://localhost:5000/products?limit=6").then((res) =>
+        fetch("https://mpt-server.herokuapp.com/products?limit=6").then((res) =>
             res.json()
         )
     );

@@ -7,20 +7,16 @@ import useAdmin from "../../Hooks/useAdmin";
 const Dashboard = () => {
     const [user] = useAuthState(auth);
     const [isAdmin] = useAdmin(user);
-    console.log("checking admin ", isAdmin);
+
     return (
-        <div class="drawer drawer-mobile">
-            <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-            <div class="drawer-content">
+        <div className="drawer drawer-mobile">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content">
                 {/* <!-- Page content here --> */}
                 <div className="flex lg:block justify-between items-center ">
-                    {/* <label for="my-drawer-2" class="btn btn-primary lg:hidden">
-                        Open drawer
-                    </label>{" "} */}
-
                     <label
                         tabIndex="1"
-                        for="my-drawer-2"
+                        htmlFor="my-drawer-2"
                         className="btn btn-ghost lg:hidden"
                     >
                         <svg
@@ -42,10 +38,10 @@ const Dashboard = () => {
                 </div>
                 <Outlet></Outlet>
             </div>
-            <div class="drawer-side">
-                <label for="my-drawer-2" class="drawer-overlay"></label>
+            <div className="drawer-side">
+                <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
-                <ul class="menu p-4 overflow-y-auto w-44 bg-slate-900 lg:bg-slate-400/10">
+                <ul className="menu p-4 overflow-y-auto w-44 bg-slate-900 lg:bg-slate-400/10">
                     {/* <!-- Sidebar content here --> */}
                     <h2 className="lg:text-center text-2xl mb-7 uppercase">
                         Dashboard

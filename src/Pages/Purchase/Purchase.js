@@ -19,7 +19,7 @@ const Purchase = () => {
     useEffect(() => {
         const get = async () => {
             const response = await axios.get(
-                `http://localhost:5000/products/${id}`
+                `https://mpt-server.herokuapp.com/products/${id}`
             );
             setProduct(response.data);
         };
@@ -56,7 +56,7 @@ const Purchase = () => {
         purchaseData.productId = product._id;
         purchaseData.productPrice = product.price;
         const response = await axios.post(
-            "http://localhost:5000/orders",
+            "https://mpt-server.herokuapp.com/orders",
             purchaseData
         );
 

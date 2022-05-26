@@ -9,7 +9,7 @@ const useAdmin = (user) => {
         if (email) {
             const getData = async () => {
                 const { data } = await axios.get(
-                    `http://localhost:5000/checkAdmin?email=${email}`
+                    `https://mpt-server.herokuapp.com/checkAdmin?email=${email}`
                 );
                 setIsAdmin(data.isAdmin);
                 setAdminLoading(false);

@@ -6,7 +6,9 @@ const UserReviews = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
         const get = async () => {
-            const { data } = await axios.get(`http://localhost:5000/reviews`);
+            const { data } = await axios.get(
+                `https://mpt-server.herokuapp.com/reviews`
+            );
             setReviews(data);
         };
         get();

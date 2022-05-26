@@ -23,10 +23,9 @@ const Payment = () => {
     useEffect(() => {
         const get = async () => {
             const { data } = await axios.get(
-                `http://localhost:5000/order/${orderId}?email=${user?.email}`
+                `https://mpt-server.herokuapp.com/order/${orderId}?email=${user?.email}`
             );
             setOrder(data);
-            console.log(data);
         };
         get();
     }, [orderId, user]);

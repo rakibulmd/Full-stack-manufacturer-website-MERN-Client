@@ -34,11 +34,11 @@ const AddProduct = () => {
                     data.stock = parseInt(data.stock);
                     data.price = parseInt(data.price);
                     data.moq = parseInt(data.moq);
-                    console.log(data);
+
                     try {
                         const post = async () => {
                             const response = await axios.post(
-                                `http://localhost:5000/addProduct?email=${user?.email}`,
+                                `https://mpt-server.herokuapp.com/addProduct?email=${user?.email}`,
                                 data
                             );
                             if (response?.data.insertedId) {

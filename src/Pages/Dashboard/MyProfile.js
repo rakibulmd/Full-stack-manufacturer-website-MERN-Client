@@ -20,17 +20,16 @@ const MyProfile = () => {
     useEffect(() => {
         const get = async () => {
             const { data } = await axios.get(
-                `http://localhost:5000/user?email=${user?.email}`
+                `https://mpt-server.herokuapp.com/user?email=${user?.email}`
             );
             setUserData(data);
-            console.log(data);
         };
         get();
     }, [user, updated]);
 
     const onSubmit = async (data) => {
         const response = await axios.put(
-            `http://localhost:5000/user/${user?.email}`,
+            `https://mpt-server.herokuapp.com/user/${user?.email}`,
             { data }
         );
         if (response?.data?.result?.modifiedCount) {
@@ -44,8 +43,8 @@ const MyProfile = () => {
             <div className="pt-5">
                 <div className="flex justify-center items-center gap-5 border-b-2 pb-2 border-gray-500 mb-5">
                     {userData?.img && (
-                        <div class="avatar">
-                            <div class="w-16">
+                        <div className="avatar">
+                            <div className="w-16">
                                 <img src={userData.img} alt="" />
                             </div>
                         </div>
