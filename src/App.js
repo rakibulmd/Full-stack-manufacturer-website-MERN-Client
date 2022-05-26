@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import MyReview from "./Pages/Dashboard/MyReview";
+import Payment from "./Pages/Dashboard/Payment";
 import Users from "./Pages/Dashboard/Users";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
@@ -41,6 +42,10 @@ function App() {
                     <Route
                         path="myOrders"
                         element={<MyOrders></MyOrders>}
+                    ></Route>
+                    <Route
+                        path="payment/:orderId"
+                        element={<Payment></Payment>}
                     ></Route>
                     <Route
                         path="myReviews"

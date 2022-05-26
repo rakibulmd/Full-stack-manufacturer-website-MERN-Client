@@ -106,7 +106,14 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                         </div>
                     ) : (
                         <div className="card-actions">
-                            <button className="btn btn-primary">Pay Now</button>
+                            <button
+                                onClick={() =>
+                                    navigate(`/dashboard/payment/${_id}`)
+                                }
+                                className="btn btn-primary"
+                            >
+                                Pay Now
+                            </button>
                             <button
                                 className="btn btn-error"
                                 onClick={() =>
