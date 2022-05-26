@@ -5,9 +5,13 @@ const Product = ({ product }) => {
     const { _id, name, img, description, price, moq, stock, rating } = product;
     const navigate = useNavigate();
     return (
-        <div class="card bg-slate-600/10 text-white shadow-3xl">
-            <figure class="px-10 pt-10">
-                <img src={img} alt="Shoes" class="rounded-xl" />
+        <div class="card bg-slate-600/10 hover:bg-slate-600/20 text-white shadow-3xl">
+            <figure className="px-10 pt-10 overflow-hidden">
+                <img
+                    src={img}
+                    alt="Shoes"
+                    className="rounded-xl hover:scale-105 transition-all"
+                />
             </figure>
             <div class="card-body items-start  text-left">
                 <h2 class="card-title text-left">{name}</h2>

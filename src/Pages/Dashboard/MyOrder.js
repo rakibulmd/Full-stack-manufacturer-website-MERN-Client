@@ -50,7 +50,7 @@ const MyOrder = ({ order, updated, setUpdated }) => {
                 background: `url(${logoDim}) no-repeat`,
             }}
         >
-            <div className="card-body">
+            <div className="card-body bg-slate-600/20">
                 <div className="lg:flex justify-between">
                     <Link to={`/purchase/${productId}`} className="card-title">
                         {productName}

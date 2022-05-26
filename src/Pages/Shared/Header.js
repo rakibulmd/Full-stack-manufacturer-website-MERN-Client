@@ -4,6 +4,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import logo from "../../asset/images/logo/logo.png";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
+import Statusbar from "./Statusbar";
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -48,6 +49,7 @@ const Header = () => {
     );
     return (
         <div className=" bg-secondary text-white sticky top-0 z-50 shadow-md">
+            <Statusbar></Statusbar>
             <div className="container mx-auto">
                 <div className="navbar">
                     <div className="navbar-start">

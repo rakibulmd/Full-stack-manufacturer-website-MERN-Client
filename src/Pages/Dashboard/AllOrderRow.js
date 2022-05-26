@@ -66,12 +66,12 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
     };
     return (
         <div
-            className="card w-full p-3 shadow-3xl"
-            style={{
-                background: `url(${logoDim}) no-repeat`,
-            }}
+            className="card w-full shadow-3xl bg-slate-600/20"
+            // style={{
+            //     background: `url(${logoDim}) no-repeat`,
+            // }}
         >
-            <div className="card-bod">
+            <div className="card-body">
                 <div className="lg:flex justify-between">
                     <Link
                         to={`/purchase/${productId}`}
@@ -91,7 +91,7 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
                     {paid ? (
                         <div className="card-actions">
                             {order?.shipped ? (
-                                <button className="btn btn-disabled">
+                                <button className="btn btn-disabled  text-white">
                                     Shipped
                                 </button>
                             ) : (
@@ -125,25 +125,19 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
                     )}
                 </div>
 
-                <div>
-                    <ul className="steps mt-3">
-                        <li className="step step-primary mr-3">Order</li>
-                        <li
-                            className={
-                                paid ? "step step-primary mr-3" : "step mr-3"
-                            }
-                        >
-                            Payment
-                        </li>
-                        <li
-                            className={
-                                order?.shipped ? "step step-primary" : "step"
-                            }
-                        >
-                            Shipment
-                        </li>
-                    </ul>
-                </div>
+                <ul className="steps mt-3">
+                    <li className="step step-primary">Ordered</li>
+                    <li className={paid ? "step step-primary" : "step"}>
+                        Paid
+                    </li>
+                    <li
+                        className={
+                            order?.shipped ? "step step-primary" : "step"
+                        }
+                    >
+                        Shipped
+                    </li>
+                </ul>
             </div>
         </div>
     );

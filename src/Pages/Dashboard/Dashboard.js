@@ -25,7 +25,7 @@ const Dashboard = () => {
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
+                            className="h-10 w-10"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -37,6 +37,7 @@ const Dashboard = () => {
                                 d="M4 6h16M4 12h8m-8 6h16"
                             />
                         </svg>
+                        Dashboard
                     </label>
                 </div>
                 <Outlet></Outlet>
@@ -50,16 +51,13 @@ const Dashboard = () => {
                         Dashboard
                     </h2>
                     <li className="mb-3">
-                        <Link
-                            className="btn btn-primary text-black"
-                            to="/dashboard"
-                        >
+                        <Link className="btn btn-outline" to="/dashboard">
                             My Profile
                         </Link>
                     </li>
                     <li className="mb-3">
                         <Link
-                            className="btn btn-primary text-black"
+                            className="btn btn-outline"
                             to="/dashboard/myOrders"
                         >
                             My Orders
@@ -67,7 +65,7 @@ const Dashboard = () => {
                     </li>
                     <li className="mb-3">
                         <Link
-                            className="btn btn-primary text-black"
+                            className="btn btn-outline"
                             to="/dashboard/myReviews"
                         >
                             My Review
@@ -78,7 +76,7 @@ const Dashboard = () => {
                         <>
                             <li className="mb-3">
                                 <Link
-                                    className="btn btn-primary text-black"
+                                    className="btn btn-outline"
                                     to="/dashboard/users"
                                 >
                                     Manage Users
@@ -86,7 +84,7 @@ const Dashboard = () => {
                             </li>
                             <li className="mb-3">
                                 <Link
-                                    className="btn btn-primary text-black"
+                                    className="btn btn-outline"
                                     to="/dashboard/allOrders"
                                 >
                                     All Orders
@@ -94,7 +92,7 @@ const Dashboard = () => {
                             </li>
                             <li className="mb-3">
                                 <Link
-                                    className="btn btn-primary text-black"
+                                    className="btn btn-outline"
                                     to="/dashboard/addProduct"
                                 >
                                     Add Product

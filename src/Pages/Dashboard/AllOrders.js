@@ -38,7 +38,7 @@ const AllOrders = () => {
     return (
         <div>
             <h2>This is all orders {allOrders?.length}</h2>
-            <div className="grid grid-cols-1 gap-y-6 p-3">
+            <div className="grid grid-cols-1 gap-y-8 p-3">
                 {allOrders.map((order) => (
                     <AllOrderRow
                         key={order._id}

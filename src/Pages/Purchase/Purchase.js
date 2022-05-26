@@ -77,25 +77,25 @@ const Purchase = () => {
                     />
                 </div>
                 <div className="text-center md:text-left">
-                    <h2 className="text-xl">Name: {product?.name}</h2>
+                    <h2 className="text-xl font-bold">Name: {product?.name}</h2>
                     <p>id: {product?._id}</p>
+                    <p className="mb-5">Description: {product?.description}</p>
                     <p>MOQ: {product?.moq}</p>
                     <p>Stock: {product?.stock}</p>
-                    <p>Description: {product?.description}</p>
-                    <p>Price: {product?.price}</p>
-                    <p className="pb-3">Rating: {product?.rating}</p>
+
+                    <p className="text-xl">Price: $ {product?.price}</p>
                 </div>
             </div>
             <h2 className="text-3xl text-center mt-5">
                 Please fill out this form to Purchase
             </h2>
             <div className="max-w-[500px] mx-auto py-10 px-2">
-                <div className="p-5 bg-white rounded-md border border-gray-700">
+                <div className="p-5 bg-slate-600/30 rounded-md border border-gray-700">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-5">
                             <label
                                 htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-secondary"
+                                className="block mb-2 text-sm font-medium "
                             >
                                 Name:
                             </label>
@@ -104,6 +104,7 @@ const Purchase = () => {
                                 value={user?.displayName}
                                 id="name"
                                 readOnly
+                                disabled
                                 autoComplete="off"
                                 {...register("name")}
                             />
@@ -111,7 +112,7 @@ const Purchase = () => {
                         <div className="mb-5">
                             <label
                                 htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-secondary"
+                                className="block mb-2 text-sm font-medium "
                             >
                                 Email:
                             </label>
@@ -119,6 +120,7 @@ const Purchase = () => {
                                 className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
                                 type="email"
                                 id="email"
+                                disabled
                                 value={user?.email}
                                 readOnly
                                 autoComplete="off"
@@ -128,12 +130,12 @@ const Purchase = () => {
                         <div className="mb-5">
                             <label
                                 htmlFor="phone"
-                                className="block mb-2 text-sm font-medium text-secondary"
+                                className="block mb-2 text-sm font-medium "
                             >
                                 Phone:
                             </label>
                             <input
-                                className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
+                                className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/50 text-black  border-secondary"
                                 type="tel"
                                 placeholder="Phone"
                                 autoComplete="off"
@@ -156,12 +158,12 @@ const Purchase = () => {
                         <div className="mb-5">
                             <label
                                 htmlFor="address"
-                                className="block mb-2 text-sm font-medium text-secondary"
+                                className="block mb-2 text-sm font-medium "
                             >
                                 Shipping Address:
                             </label>
                             <input
-                                className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/75 text-black  border-secondary"
+                                className="focus:outline-none focus:ring focus:ring-primary border text-sm rounded-md block w-full p-2.5  placeholder-secondary/50 text-black  border-secondary"
                                 type="text"
                                 placeholder="Address"
                                 autoComplete="off"
@@ -184,7 +186,7 @@ const Purchase = () => {
                         <div className="mb-5">
                             <label
                                 htmlFor="quantity"
-                                className="block mb-2 text-sm font-medium text-secondary"
+                                className="block mb-2 text-sm font-medium "
                             >
                                 Quantity:
                             </label>
@@ -231,7 +233,7 @@ const Purchase = () => {
                         </div>
 
                         <input
-                            className="w-full bg-primary hover:bg-secondary hover:text-primary px-5 py-2 rounded-md text-secondary transition-all btn"
+                            className="w-full px-5 py-2 rounded-md  transition-all btn btn-primary text-black"
                             disabled={errors.quantity}
                             type="submit"
                             value="Order Now"

@@ -29,7 +29,7 @@ const Banner = () => {
                         >
                             About Us
                         </Link>
-                        <Link className="btn btn-primary " to="/products">
+                        <Link className="btn btn-primary " to="/allProducts">
                             Products
                         </Link>
                     </div>
