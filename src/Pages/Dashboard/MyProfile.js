@@ -40,9 +40,9 @@ const MyProfile = () => {
         }
     };
     return (
-        <div className="bg-slate-600/20 max-w-md w-full mx-auto p-2 mt-10 rounded-lg">
+        <div className="bg-slate-600/20 max-w-2xl w-full mx-auto p-2 mt-10 rounded-lg">
             <div className="pt-5">
-                <div className="flex justify-start items-center gap-5 border-b-2 pb-2 border-gray-500 mb-5">
+                <div className="flex justify-center items-center gap-5 border-b-2 pb-2 border-gray-500 mb-5">
                     {userData?.img && (
                         <div class="avatar">
                             <div class="w-16">
@@ -55,11 +55,19 @@ const MyProfile = () => {
                         <h2>{user?.email}</h2>
                     </div>
                 </div>
-                <div className="p-2">
-                    <h2>Location: {userData?.data?.location}</h2>
-                    <h2>Phone: {userData?.data?.phone}</h2>
-                    <h2>Education: {userData?.data?.education}</h2>
-                    <h2>LinkedIn: {userData?.data?.linkedIn}</h2>
+                <div className="p-2 text-center text-lg">
+                    {userData?.data?.location && (
+                        <h2>Location: {userData?.data?.location}</h2>
+                    )}
+                    {userData?.data?.phone && (
+                        <h2>Phone: {userData?.data?.phone}</h2>
+                    )}
+                    {userData?.data?.education && (
+                        <h2>Education: {userData?.data?.education}</h2>
+                    )}
+                    {userData?.data?.linkedIn && (
+                        <h2>LinkedIn: {userData?.data?.linkedIn}</h2>
+                    )}
                 </div>
                 <div>
                     <div className="max-w-[500px] mx-auto py-5">

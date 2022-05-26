@@ -20,7 +20,7 @@ const Blogs = () => {
         );
     }
     return (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto py-10 bg-secondary">
             <h2 className="text-3xl font-bold text-center pb-5">QnAs</h2>
             {questionAndAnswers.map((item) => (
                 <Blog key={item._id} item={item}></Blog>

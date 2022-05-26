@@ -34,9 +34,7 @@ const Header = () => {
             <li className="font-bold hover:text-primary">
                 <CustomLink to="/allProducts">Products</CustomLink>
             </li>
-            <li className="font-bold hover:text-primary">
-                <CustomLink to="/slot">Slot</CustomLink>
-            </li>
+
             {user && (
                 <li className="font-bold hover:text-primary">
                     <CustomLink to="/dashboard">Dashboard</CustomLink>
@@ -44,6 +42,9 @@ const Header = () => {
             )}
             <li className="font-bold hover:text-primary">
                 <CustomLink to="/blogs">Blogs</CustomLink>
+            </li>
+            <li className="font-bold hover:text-primary">
+                <CustomLink to="/myPortfolio">My Portfolio</CustomLink>
             </li>
         </>
     );

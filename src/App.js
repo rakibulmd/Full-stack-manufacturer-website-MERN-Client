@@ -17,6 +17,7 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import RequireAdmin from "./Pages/Login/RequireAdmin";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import MyPortfolio from "./Pages/My Portfolio/MyPortfolio";
 import Purchase from "./Pages/Purchase/Purchase";
 import Header from "./Pages/Shared/Header";
 
@@ -93,13 +94,10 @@ function App() {
                         </RequireAuth>
                     }
                 ></Route>
+                <Route path="/blogs" element={<Blogs></Blogs>}></Route>
                 <Route
-                    path="/blogs"
-                    element={
-                        <RequireAuth>
-                            <Blogs></Blogs>
-                        </RequireAuth>
-                    }
+                    path="/myPortfolio"
+                    element={<MyPortfolio></MyPortfolio>}
                 ></Route>
             </Routes>
 
