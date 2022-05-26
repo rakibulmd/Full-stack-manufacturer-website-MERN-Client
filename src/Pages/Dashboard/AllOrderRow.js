@@ -68,33 +68,44 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
         });
     };
     const handleDeleteOrder = async (orderId) => {
-        try {
-            const response = await axios.delete(
-                `https://mpt-server.herokuapp.com/orders/${orderId}?email=${user?.email}`
-            );
-            if (response?.data?.deletedCount) {
-                setOrderUpdated(!orderUpdated);
-                toast.success("Order removed");
+        MySwal.fire({
+            title: "Are you sure?",
+            text: `Delete?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, confirm delete!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.delete(
+                        `https://mpt-server.herokuapp.com/orders/${orderId}?email=${user?.email}`
+                    );
+                    if (response?.data?.deletedCount) {
+                        setOrderUpdated(!orderUpdated);
+                        MySwal.fire(
+                            "Deleted!",
+                            "Order deleted successfully.",
+                            "success"
+                        );
+                    }
+                } catch (error) {
+                    if (
+                        error.response.status === 401 ||
+                        error.response.status === 403
+                    ) {
+                        navigate("/login");
+                        signOut(auth);
+                        localStorage.removeItem("accessToken");
+                        return;
+                    }
+                }
             }
-        } catch (error) {
-            if (
-                error.response.status === 401 ||
-                error.response.status === 403
-            ) {
-                navigate("/login");
-                signOut(auth);
-                localStorage.removeItem("accessToken");
-                return;
-            }
-        }
+        });
     };
     return (
-        <div
-            className="card w-full shadow-3xl bg-slate-600/20"
-            // style={{
-            //     background: `url(${logoDim}) no-repeat`,
-            // }}
-        >
+        <div className="card w-full shadow-3xl bg-slate-600/20">
             <div className="card-body">
                 <div className="lg:flex justify-between">
                     <Link

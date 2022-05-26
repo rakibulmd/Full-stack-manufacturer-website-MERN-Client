@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
-import logoDim from "../../asset/images/logo/logoDim.png";
 import axios from "axios";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";

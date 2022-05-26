@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../Shared/Footer";
-import Statusbar from "../Shared/Statusbar";
 import Banner from "./Banner";
 import BusinessSummary from "./BusinessSummary";
 import Feature from "./Feature";

@@ -5,11 +5,7 @@ import Footer from "../Shared/Footer";
 import Loading from "../Shared/Loading";
 
 const AllProducts = () => {
-    const {
-        data: products,
-        isLoading,
-        error,
-    } = useQuery("products", () =>
+    const { data: products, isLoading } = useQuery("products", () =>
         fetch("https://mpt-server.herokuapp.com/products").then((res) =>
             res.json()
         )
