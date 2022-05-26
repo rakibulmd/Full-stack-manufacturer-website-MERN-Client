@@ -50,7 +50,7 @@ const Payment = () => {
                 </div>
                 <div className="py-5 bg-white text-black ">
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm />
+                        <CheckoutForm order={order} />
                     </Elements>
                 </div>
             </div>

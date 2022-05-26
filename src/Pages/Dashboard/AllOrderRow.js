@@ -27,7 +27,9 @@ const AllOrderRow = ({ order, orderUpdated, setOrderUpdated }) => {
             );
             if (response?.data?.modifiedCount) {
                 setOrderUpdated(!orderUpdated);
-                await axios.put(`http://localhost:5000/orders/${orderId}`);
+                await axios.put(`http://localhost:5000/orders/${orderId}`, {
+                    shipped: true,
+                });
             }
         } catch (error) {
             if (error.response.status === 406) {
