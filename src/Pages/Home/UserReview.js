@@ -39,7 +39,7 @@ const UserReview = ({ review }) => {
                     </div>
                     <p>{date}</p>
                 </div>
-                <div className="pb-12">
+                <div className="pb-12 mb-5">
                     <h2 className="font-bold py-3">
                         {" "}
                         <cite>{title}</cite>{" "}
@@ -49,10 +49,15 @@ const UserReview = ({ review }) => {
                         <cite>{details}</cite>{" "}
                     </p>
                 </div>
-                <div className=" flex justify-end items-center px-2 rounded-3xl absolute bottom-1">
-                    <div className="w-16 rounded-xl">
-                        <img src={img} alt="" />
+                <div className="flex justify-end items-center px-2 rounded-3xl absolute bottom-1 gap-3 mb-1">
+                    <div className="w-16">
+                        <img
+                            className="rounded-full p-1 border-primary border"
+                            src={img}
+                            alt=""
+                        />
                     </div>
+
                     <div>
                         <h2 className="text-xl"> - {name}</h2>
                     </div>

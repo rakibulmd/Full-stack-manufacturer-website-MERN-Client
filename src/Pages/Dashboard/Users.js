@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 import UserRow from "./UserRow";
 
 const Users = () => {
     const [user] = useAuthState(auth);
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const [updated, setUpdated] = useState(false);
     const navigate = useNavigate();
 
@@ -34,6 +35,15 @@ const Users = () => {
         };
         getData();
     }, [navigate, user, updated]);
+    if (!users) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="p-3">
@@ -62,8 +72,8 @@ const Users = () => {
                     <tfoot>
                         <tr>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Email</th>
+                            <th>Admin Status</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>

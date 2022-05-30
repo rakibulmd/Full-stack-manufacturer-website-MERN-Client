@@ -5,10 +5,11 @@ import auth from "../../firebase.init";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { signOut } from "firebase/auth";
+import Loading from "../Shared/Loading";
 
 const ManageProducts = () => {
     const [user] = useAuthState(auth);
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(null);
     const MySwal = withReactContent(Swal);
     const [updated, setUpdated] = useState(false);
 
@@ -57,6 +58,15 @@ const ManageProducts = () => {
             }
         });
     };
+    if (!products) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
             <h2 className="text-3xl text-center py-5">Manage Products</h2>
