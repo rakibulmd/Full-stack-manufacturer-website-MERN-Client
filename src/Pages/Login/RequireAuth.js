@@ -9,7 +9,7 @@ const RequireAuth = ({ children }) => {
     const location = useLocation();
     if (loading) {
         return (
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center h-screen">
                 <div className="w-40 h-40 mx-auto">
                     <Loading></Loading>
                 </div>
