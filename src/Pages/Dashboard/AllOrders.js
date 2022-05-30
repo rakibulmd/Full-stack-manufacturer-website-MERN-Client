@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 import AllOrderRow from "./AllOrderRow";
 
 const AllOrders = () => {
     const [user] = useAuthState(auth);
-    const [allOrders, setAllOrders] = useState([]);
+    const [allOrders, setAllOrders] = useState(null);
     const [orderUpdated, setOrderUpdated] = useState(false);
     const navigate = useNavigate();
 
@@ -34,9 +35,21 @@ const AllOrders = () => {
         };
         getData();
     }, [navigate, user, orderUpdated]);
+
+    if (!allOrders) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
-            <h2>This is all orders {allOrders?.length}</h2>
+            <h2 className="text-3xl uppercase font-bold text-center py-5">
+                All Orders
+            </h2>
             <div className="grid grid-cols-1 gap-y-8 p-3">
                 {allOrders.map((order) => (
                     <AllOrderRow
