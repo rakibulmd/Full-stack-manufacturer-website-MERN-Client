@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 import MyOrder from "./MyOrder";
 
 const MyOrders = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const [updated, setUpdated] = useState(false);
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState(null);
     useEffect(() => {
         const getData = async () => {
             try {
@@ -33,6 +34,15 @@ const MyOrders = () => {
         };
         getData();
     }, [user, navigate, updated]);
+    if (!orders) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
             <h2 className="text-3xl uppercase font-bold text-center py-5">
