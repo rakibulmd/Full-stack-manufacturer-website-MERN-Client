@@ -15,7 +15,7 @@ const MyPortfolio = () => {
                         Educational Background
                     </h2>
                     <p className="text-center pt-3 font-bold">
-                        Diploma Engineering in Marine Technology
+                        B.Sc. Engineering in Mechanical Engineering
                     </p>
                 </div>
                 <div className="mt-12">
