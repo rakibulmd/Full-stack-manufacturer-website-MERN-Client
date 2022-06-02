@@ -15,9 +15,11 @@ const Header = () => {
         return (
             <div>
                 <Link
-                    style={{
-                        color: match ? "#f7c02d" : "",
-                    }}
+                    className={`${
+                        match
+                            ? "border-primary border-b-2 ::after py-1"
+                            : "py-1"
+                    }`}
                     to={to}
                     {...props}
                 >
@@ -44,7 +46,7 @@ const Header = () => {
                 <CustomLink to="/blogs">Blogs</CustomLink>
             </li>
             <li className="font-bold hover:text-primary">
-                <CustomLink to="/myPortfolio">My Portfolio</CustomLink>
+                <CustomLink to="/myPortfolio">Developer</CustomLink>
             </li>
         </>
     );

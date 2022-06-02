@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
 import Product from "./Product";
+import { FaArrowRight } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 const Products = () => {
     const {
@@ -32,6 +34,20 @@ const Products = () => {
                     {products?.map((product) => (
                         <Product product={product} key={product._id}></Product>
                     ))}
+                </div>
+                <div className="flex justify-center items-center mt-10 mb-20">
+                    <button className="btn btn-primary px-10 text-xl">
+                        All Products{" "}
+                        <IconContext.Provider
+                            value={{
+                                className: "w-6 h-6 ml-2 text-black",
+                            }}
+                        >
+                            <div>
+                                <FaArrowRight />
+                            </div>
+                        </IconContext.Provider>
+                    </button>
                 </div>
             </div>
         </div>

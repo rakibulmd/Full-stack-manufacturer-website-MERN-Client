@@ -27,12 +27,18 @@ const Product = ({ product }) => {
                     </p>
                 </div>
                 <div className="card-actions">
-                    <button
-                        onClick={() => navigate(`/purchase/${_id}`)}
-                        className="btn btn-primary"
-                    >
-                        Order Now
-                    </button>
+                    {stock > 0 ? (
+                        <button
+                            onClick={() => navigate(`/purchase/${_id}`)}
+                            className="btn btn-primary"
+                        >
+                            Order Now
+                        </button>
+                    ) : (
+                        <span className="btn btn-outline bg-gray-700 text-white/75 active:bg-red-500">
+                            Stock Out
+                        </span>
+                    )}
                 </div>
             </div>
         </div>
