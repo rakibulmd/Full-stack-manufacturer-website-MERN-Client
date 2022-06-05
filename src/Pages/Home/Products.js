@@ -4,8 +4,10 @@ import Loading from "../Shared/Loading";
 import Product from "./Product";
 import { FaArrowRight } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+    const navigate = useNavigate();
     const {
         data: products,
         isLoading,
@@ -36,7 +38,12 @@ const Products = () => {
                     ))}
                 </div>
                 <div className="flex justify-center items-center mt-10 mb-20">
-                    <button className="btn btn-primary px-10 text-xl">
+                    <button
+                        onClick={() => {
+                            navigate("/allProducts");
+                        }}
+                        className="btn btn-primary px-10 text-xl"
+                    >
                         All Products{" "}
                         <IconContext.Provider
                             value={{

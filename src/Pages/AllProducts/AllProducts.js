@@ -19,6 +19,15 @@ const AllProducts = () => {
             </div>
         );
     }
+    if (products.length === 0) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-40 h-40 mx-auto">
+                    <Loading></Loading>
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
             <div className="container mx-auto py-10">
